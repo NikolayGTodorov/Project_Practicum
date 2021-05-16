@@ -143,23 +143,27 @@
     <ClInclude Include="AccountManager.h" />
     <ClInclude Include="BirthDate.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="CardManager.h" />
     <ClInclude Include="ClientUser.h" />
     <ClInclude Include="EmployeeUser.h" />
     <ClInclude Include="ISerializable.h" />
     <ClInclude Include="PhoneNumber.h" />
     <ClInclude Include="SystemAdmin.h" />
+    <ClInclude Include="User.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />
     <ClCompile Include="AccountManager.cpp" />
     <ClCompile Include="BirthDate.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="CardManager.cpp" />
     <ClCompile Include="ClientUser.cpp" />
     <ClCompile Include="EmployeeUser.cpp" />
     <ClCompile Include="ISerializable.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PhoneNumber.cpp" />
     <ClCompile Include="SystemAdmin.cpp" />
+    <ClCompile Include="User.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

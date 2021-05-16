@@ -1,13 +1,15 @@
 #pragma once
 #include "ClientUser.h"
+#include "User.h"
+#include "PhoneNumber.h"
 class EmployeeUser :
-    public ClientUser
+    public User
 {
     std::string mUsername;
     std::string mPassword;
     PhoneNumber mPhoneNumber;
 public:
-    ClientUser(std::string username, std::string password, PhoneNumber phone);
+    //EmployeeUser(std::string username, std::string password, PhoneNumber phone); //more params needed
 
     virtual void serialize(std::ostream& os) override;
     virtual void deserialize(std::istream& is) override;
