@@ -139,7 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Account.h" />
+    <ClInclude Include="AccountManager.h" />
     <ClInclude Include="BirthDate.h" />
+    <ClInclude Include="Card.h" />
     <ClInclude Include="ClientUser.h" />
     <ClInclude Include="EmployeeUser.h" />
     <ClInclude Include="ISerializable.h" />
@@ -147,7 +150,10 @@
     <ClInclude Include="SystemAdmin.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Account.cpp" />
+    <ClCompile Include="AccountManager.cpp" />
     <ClCompile Include="BirthDate.cpp" />
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="ClientUser.cpp" />
     <ClCompile Include="EmployeeUser.cpp" />
     <ClCompile Include="ISerializable.cpp" />
