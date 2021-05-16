@@ -139,10 +139,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BirthDate.h" />
+    <ClInclude Include="ClientUser.h" />
+    <ClInclude Include="EmployeeUser.h" />
     <ClInclude Include="ISerializable.h" />
+    <ClInclude Include="PhoneNumber.h" />
+    <ClInclude Include="SystemAdmin.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BirthDate.cpp" />
+    <ClCompile Include="ClientUser.cpp" />
+    <ClCompile Include="EmployeeUser.cpp" />
     <ClCompile Include="ISerializable.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PhoneNumber.cpp" />
+    <ClCompile Include="SystemAdmin.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
