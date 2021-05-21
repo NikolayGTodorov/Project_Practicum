@@ -6,9 +6,12 @@
 class ClientUser :
     public User
 {
-    std::vector<Account*> userAccounts;
+    std::vector<Account*> mUserAccounts;
 public:
-    //Create constructor
+    ClientUser(std::vector<Account*> userAccounts, 
+        std::string egn, std::string firstName, std::string secondName,
+        std::string lastName, BirthDate birthDate,
+        std::string address);// check for =address
 
     virtual void serialize(std::ostream& os) override;
     virtual void deserialize(std::istream& is) override;

@@ -3,12 +3,10 @@
 class BirthDate :
 	public ISerializable
 {
-	short int mDay;
-	short int mMonth;
-	short int mYear;
+	std::string mDate;
 public:
-	BirthDate(short int day, short int month, short int year);
-	bool validate(short int day, short int month, short int year);
+	BirthDate(std::string birthDate);
+	bool validInput(std::string dateToValidate);
 
 	virtual void serialize(std::ostream& os) override;
 	virtual void deserialize(std::istream& is) override;

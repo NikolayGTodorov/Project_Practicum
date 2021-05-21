@@ -4,6 +4,7 @@
 class User :
 	public ISerializable
 {
+protected:
 	std::string mEgn;   // maybe change this to my class EGN which has char[10] and manages its memory
 	std::string mFirstName;
 	std::string mSecondName;

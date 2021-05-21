@@ -4,8 +4,12 @@ class SystemAdmin
 {
 	std::string mUsername;
 	std::string mPassword;
+
+	static SystemAdmin* admin;
+	SystemAdmin();
+
 public:
-	// add constructor or make the class use singleton, only 1 admin??
+	static SystemAdmin* getSystemAdminInstace();
 	void addEmployeeAccount();
 	void deleteEmployeeAccount();
 };
