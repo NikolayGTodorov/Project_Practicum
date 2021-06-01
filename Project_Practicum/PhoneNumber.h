@@ -1,7 +1,11 @@
 #pragma once
+#include <iostream>
+#include "ISerializable.h"
 class PhoneNumber :
 	public ISerializable
 {
+	friend std::istream& operator>>(std::istream& is, PhoneNumber& phoneNumber);
+
 	char* mPhone;
 public:
 	virtual void serialize(std::ostream& os) override;
@@ -18,3 +22,4 @@ public:
 	~PhoneNumber();
 };
 
+std::istream& operator>>(std::istream& is, PhoneNumber& phoneNumber);

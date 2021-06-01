@@ -1,5 +1,6 @@
-#include <iostream>/*
-
+#include <iostream>
+#include "SystemAdmin.h"
+/*
 void fixStream() {
 	if (std::cin.bad() || std::cin.fail()) {
 		std::cin.clear();
@@ -48,8 +49,10 @@ void run() {
 
 	delete[] command;
 }
-
+*/
 int main() {
 
+	SystemAdmin* s = SystemAdmin::getSystemAdminInstance();
+	s->addEmployeeAccount();
 
-}*/
+}

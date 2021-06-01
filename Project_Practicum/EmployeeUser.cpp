@@ -6,15 +6,32 @@ EmployeeUser::EmployeeUser(std::string username, std::string password, std::stri
 {
 }
 
+EmployeeUser::EmployeeUser()
+{
+}
+
 void EmployeeUser::serialize(std::ostream& os)
 {
 	os << mUsername << mPassword << mEgn << mFirstName
-		<< mSecondName << mLastName << mBirthDate.serialize(os) << mPhoneNumber.serialize(os) << '\n';
+		<< mSecondName << mLastName << mBirthDate << mPhoneNumber << '\n';
 }
 
 void EmployeeUser::deserialize(std::istream& is)
 {
-	//maybe add legth of strings?
-	is >> mUsername >> mPassword >> mEgn >> mFirstName
-		>> mSecondName >> mLastName >> mBirthDate.deserialize(is) >> mPhoneNumber.deserialize(is) >> '\n';
+	////maybe add legth of strings?
+	//is >> mUsername >> mPassword >> mEgn >> mFirstName
+	//	>> mSecondName >> mLastName >> mBirthDate >> mPhoneNumber >> '\n';
+}
+
+std::istream& operator>>(std::istream& is, EmployeeUser& empUser)
+{
+	std::cout << "Enter username: \n";
+	is >> empUser.mUsername;
+	std::cout << "Enter password: \n";
+	is >> empUser.mPassword;
+	is >> empUser; //check this
+	std::cout << "Enter phone number: \n";
+	is >> empUser.mPhoneNumber;
+
+	return is;
 }

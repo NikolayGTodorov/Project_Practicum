@@ -1,10 +1,13 @@
 #pragma once
 #include "ClientUser.h"
 #include "User.h"
+#include "ISerializable.h"
 #include "PhoneNumber.h"
+
 class EmployeeUser :
-    public User
+    public User, public ISerializable
 {
+    friend std::istream& operator>>(std::istream& is, EmployeeUser& empUser);
     std::string mUsername;
     std::string mPassword;
     PhoneNumber mPhoneNumber;
@@ -13,6 +16,7 @@ public:
         std::string egn, std::string firstName, std::string secondName,
         std::string lastName, BirthDate birthDate,
         std::string address,PhoneNumber phone);
+    EmployeeUser();
 
     virtual void serialize(std::ostream& os) override;
     virtual void deserialize(std::istream& is) override;
@@ -28,3 +32,4 @@ public:
 
 };
 
+std::istream& operator>>(std::istream& is, EmployeeUser& empUser);

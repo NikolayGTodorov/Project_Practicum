@@ -4,7 +4,7 @@
 #include "Account.h"
 #include "User.h"
 class ClientUser :
-    public User
+    public User, public ISerializable
 {
     std::vector<Account*> mUserAccounts;
 public:

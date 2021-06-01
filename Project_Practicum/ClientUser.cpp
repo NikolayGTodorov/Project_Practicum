@@ -12,16 +12,16 @@ void ClientUser::serialize(std::ostream& os)
 		os << acc;
 	}
 	os << mEgn << mFirstName << mSecondName << mLastName
-		<< mBirthDate.serialize(os) << mAddress << '\n';
+		<< mBirthDate << mAddress << '\n';
 }
 
 void ClientUser::deserialize(std::istream& is)
 {
-	int counter;
+	/*int counter;
 	is >> counter;
 	for (size_t i = 0; i < counter; i++) {
 		is >> mUserAccounts[i];
 	}
 	is >> mEgn >> mFirstName >> mSecondName >> mLastName
-		>> mBirthDate.deserialize(is) >> mAddress >> '\n';
+		>> mBirthDate.deserialize(is) >> mAddress >> '\n';*/
 }

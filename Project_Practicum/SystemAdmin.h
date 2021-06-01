@@ -1,5 +1,8 @@
 #pragma once
 #include <string>
+#include "EmployeeUser.h"
+#include "EmployeeManager.h"
+
 class SystemAdmin
 {
 	std::string mUsername;
@@ -9,8 +12,8 @@ class SystemAdmin
 	SystemAdmin();
 
 public:
-	static SystemAdmin* getSystemAdminInstace();
+	static SystemAdmin* getSystemAdminInstance();
 	void addEmployeeAccount();
-	void deleteEmployeeAccount();
+	//void deleteEmployeeAccount();
 };
 

@@ -145,6 +145,7 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardManager.h" />
     <ClInclude Include="ClientUser.h" />
+    <ClInclude Include="EmployeeManager.h" />
     <ClInclude Include="EmployeeUser.h" />
     <ClInclude Include="ISerializable.h" />
     <ClInclude Include="PhoneNumber.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardManager.cpp" />
     <ClCompile Include="ClientUser.cpp" />
+    <ClCompile Include="EmployeeManager.cpp" />
     <ClCompile Include="EmployeeUser.cpp" />
     <ClCompile Include="ISerializable.cpp" />
     <ClCompile Include="Main.cpp" />
