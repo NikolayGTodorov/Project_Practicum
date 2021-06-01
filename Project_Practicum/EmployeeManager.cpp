@@ -3,7 +3,8 @@
 
 EmployeeManager* EmployeeManager::employeeManager = 0;
 
-EmployeeManager::EmployeeManager()
+EmployeeManager::EmployeeManager() :
+	mEmployees{ std::vector<EmployeeUser*>() }
 {
 	//read all employees from File
 	//set initialEmployeesCount to number of account read from file

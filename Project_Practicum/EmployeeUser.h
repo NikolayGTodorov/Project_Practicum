@@ -3,6 +3,7 @@
 #include "User.h"
 #include "ISerializable.h"
 #include "PhoneNumber.h"
+#include "EmployeeManager.h"
 
 class EmployeeUser :
     public User, public ISerializable

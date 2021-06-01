@@ -6,7 +6,7 @@ EmployeeUser::EmployeeUser(std::string username, std::string password, std::stri
 {
 }
 
-EmployeeUser::EmployeeUser()
+EmployeeUser::EmployeeUser() : mPhoneNumber{}
 {
 }
 
@@ -29,9 +29,9 @@ std::istream& operator>>(std::istream& is, EmployeeUser& empUser)
 	is >> empUser.mUsername;
 	std::cout << "Enter password: \n";
 	is >> empUser.mPassword;
-	is >> empUser; //check this
+	is >> static_cast<User&>(empUser);
 	std::cout << "Enter phone number: \n";
-	is >> empUser.mPhoneNumber;
+ 	is >> empUser.mPhoneNumber;
 
 	return is;
 }

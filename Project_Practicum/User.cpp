@@ -16,6 +16,7 @@ std::string User::getUserEgn() const
 	return mEgn;
 }
 
+
 std::istream& operator>>(std::istream& is, User& user)
 {
 	EmployeeManager* empManager = EmployeeManager::getEmployeeManagerInstance();
