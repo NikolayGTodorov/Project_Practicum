@@ -5,6 +5,10 @@ ClientUser::ClientUser(std::vector<Account*> userAccounts, std::string egn, std:
 {
 }
 
+ClientUser::ClientUser() : User(), mUserAccounts{ std::vector<Account*>() }
+{
+}
+
 void ClientUser::serialize(std::ostream& os)
 {
 	for (Account* acc : mUserAccounts) {
@@ -24,4 +28,9 @@ void ClientUser::deserialize(std::istream& is)
 	}
 	is >> mEgn >> mFirstName >> mSecondName >> mLastName
 		>> mBirthDate.deserialize(is) >> mAddress >> '\n';*/
+}
+
+std::istream& operator>>(std::istream& is, ClientUser& client)
+{
+	is >> static_cast<User&>(client);
 }

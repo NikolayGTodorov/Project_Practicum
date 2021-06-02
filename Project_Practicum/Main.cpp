@@ -52,7 +52,6 @@ void run() {
 */
 int main() {
 
-	SystemAdmin* s = SystemAdmin::getSystemAdminInstance();
-	s->addEmployeeAccount();
+	
 
 }

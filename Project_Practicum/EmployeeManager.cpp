@@ -57,6 +57,7 @@ bool EmployeeManager::removeEmployeeByEgn(std::string egn)
 	for (EmployeeUser* empUser : mEmployees) {
 		index++;
 		if (empUser->getUserEgn() == egn) {
+			delete mEmployees[index];
 			mEmployees.erase(mEmployees.begin() + index);
 			return 1;
 		}

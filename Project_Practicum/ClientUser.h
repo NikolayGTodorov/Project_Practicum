@@ -6,12 +6,15 @@
 class ClientUser :
     public User, public ISerializable
 {
+    friend std::istream& operator>>(std::istream& is, ClientUser& client);
+
     std::vector<Account*> mUserAccounts;
 public:
     ClientUser(std::vector<Account*> userAccounts, 
         std::string egn, std::string firstName, std::string secondName,
         std::string lastName, BirthDate birthDate,
         std::string address);// check for =address
+    ClientUser();
 
     virtual void serialize(std::ostream& os) override;
     virtual void deserialize(std::istream& is) override;
@@ -21,3 +24,4 @@ public:
     double checkBalance();
 };
 
+std::istream& operator>>(std::istream& is, ClientUser& client);

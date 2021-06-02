@@ -1,10 +1,12 @@
 #pragma once
 #include <string>
 #include "Card.h"
+#include <vector>
 class Account
 {
+	std::string mOwnerEgn;
 	std::string mAccountNumber;
 	double mBalance;
-	Card* cards;
+	std::vector<Card*> mCards;
 };
 
