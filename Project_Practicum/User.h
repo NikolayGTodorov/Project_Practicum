@@ -6,7 +6,7 @@ class User
 {
 	friend std::istream& operator >>(std::istream& is, User& user);
 protected:
-	std::string mEgn;   // maybe change this to my class EGN which has char[10] and manages its memory
+	std::string mEgn;
 	std::string mFirstName;
 	std::string mSecondName;
 	std::string mLastName;

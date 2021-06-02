@@ -14,6 +14,6 @@ class SystemAdmin
 public:
 	static SystemAdmin* getSystemAdminInstance();
 	void addEmployeeAccount();
-	//void deleteEmployeeAccount();
+	void deleteEmployeeAccount();
 };
 

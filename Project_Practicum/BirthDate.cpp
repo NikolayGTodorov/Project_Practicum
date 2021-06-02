@@ -11,10 +11,11 @@ BirthDate::BirthDate()
 
 BirthDate::BirthDate(std::string birthDate)
 {
+
 	if (validInput(birthDate)) {
 		mDate = birthDate;
 	}
-	throw std::invalid_argument("Invalid birthdate...");
+
 }
 
 int getDaysInMonth(int year, int month) {
@@ -37,6 +38,9 @@ int getDaysInMonth(int year, int month) {
 bool BirthDate::validInput(std::string dateToValidate)
 {
 	std::string temp;
+	if (dateToValidate.length() != 10) {
+		throw std::invalid_argument("Enter valid input!");
+	}
 
 	bool validDay = 0;
 	bool validMonth = 0;
@@ -48,7 +52,7 @@ bool BirthDate::validInput(std::string dateToValidate)
 
 	temp = dateToValidate.substr(6, 10);
 	int year = std::stoi(temp);
-	validYear = (year > LOWEST_YEAR && year <= now.tm_year + 1780); //get the current year - 120
+	validYear = (year > now.tm_year + 1780 && year <= now.tm_year + 1900); //get the current year - 120
 	if (!validYear) {
 		return 0;
 	}
@@ -76,10 +80,10 @@ void BirthDate::deserialize(std::istream& is)
 
 std::istream& operator>>(std::istream& is, BirthDate& birthDate)
 {
-	std::cout << "Enter date in format mm\\dd\\yyyy: \n";
+	std::cout << "Enter date in format mm/dd/yyyy: \n";
 	is >> birthDate.mDate;
-	/*if (!birthDate.validInput(birthDate.mDate)) {
+	if (!birthDate.validInput(birthDate.mDate)) {
 		throw std::invalid_argument("Enter valid birthday info");
-	}*/
+	}
 	return is;
 }

@@ -6,7 +6,7 @@ EmployeeUser::EmployeeUser(std::string username, std::string password, std::stri
 {
 }
 
-EmployeeUser::EmployeeUser() : mPhoneNumber{}
+EmployeeUser::EmployeeUser()
 {
 }
 

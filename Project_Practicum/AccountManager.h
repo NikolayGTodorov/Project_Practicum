@@ -4,9 +4,9 @@
 #include "ISerializable.h"
 class AccountManager
 {
-	static AccountManager* accountManager;
 	std::vector<Account*> accounts;
 	AccountManager();
+	static AccountManager* accountManager;
 public:
 	static AccountManager* getAccountManagerInstance();
 

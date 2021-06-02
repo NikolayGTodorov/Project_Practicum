@@ -16,15 +16,25 @@ std::string User::getUserEgn() const
 	return mEgn;
 }
 
+bool containsDigitsOnly(const std::string& str) {
+	for (char c : str) {
+		if (!std::isdigit(c)) {
+			return 0;
+		}
+	}
+	return 1;
+}
 
 std::istream& operator>>(std::istream& is, User& user)
 {
 	EmployeeManager* empManager = EmployeeManager::getEmployeeManagerInstance();
 	std::cout << "Enter egn: \n";
 	is >> user.mEgn;
-	if (empManager->checkEgnAlreadyRegistered(user.mEgn)) {
-		std::cout << "Egn already exists\n";
-		throw std::exception("Egn already exists\n");
+	if (user.mEgn.length() == 10 && containsDigitsOnly(user.mEgn)) {
+		if (empManager->checkEgnAlreadyRegistered(user.mEgn)) {
+			std::cout << "Egn already exists\n";
+			throw std::exception("Egn already exists\n");
+		}
 	}
 	std::cout << "Input first name: \n";
 	is >> user.mFirstName;
@@ -34,8 +44,9 @@ std::istream& operator>>(std::istream& is, User& user)
 	is >> user.mLastName;
 	std::cout << "Input date of birth: \n";
 	is >> user.mBirthDate;
+	std::cin.ignore(256, '\n');
 	std::cout << "Input an address: \n";
-	is >> user.mAddress;
+	std::getline(is,user.mAddress, '\n');
 
 	return is;
 }
