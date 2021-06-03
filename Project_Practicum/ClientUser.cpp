@@ -35,6 +35,11 @@ int ClientUser::getAccountsCount() const
 	return mUserAccounts.size();
 }
 
+std::vector<Account*> ClientUser::getAccounts() const
+{
+	return mUserAccounts;
+}
+
 std::istream& operator>>(std::istream& is, ClientUser& client)
 {
 	is >> static_cast<User&>(client);

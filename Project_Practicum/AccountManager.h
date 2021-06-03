@@ -14,9 +14,10 @@ public:
 	void readAccountsFromFile();
 	void writeAccountsToFile();
 
+	bool accountWithNumberExists(std::string accountNumber);
 	std::string generateAccountNumber(std::string egn);
-	void open();
-	void close();
+	void addAccount(std::string egn, double balance);
+	bool removeAccount(std::string egn, std::string accountNumber);
 	void addCard();
 	void deleteCard();
 };

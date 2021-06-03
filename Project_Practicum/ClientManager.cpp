@@ -47,7 +47,7 @@ bool ClientManager::removeClient(std::string egn)
 }
 
 
-bool ClientManager::clientWithEgnExists(std::string egn)
+bool ClientManager::clientWithEgnExists(std::string egn) const
 {
 	for (ClientUser* client : mClients) {
 		if (client->getUserEgn() == egn) {

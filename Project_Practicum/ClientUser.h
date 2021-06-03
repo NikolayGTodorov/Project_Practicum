@@ -20,6 +20,8 @@ public:
     virtual void deserialize(std::istream& is) override;
 
     int getAccountsCount() const;
+    std::vector<Account*> getAccounts() const;
+
     void deposit(double amountToDeposit);
     void withdraw(double amountToWithdraw);
     double checkBalance();

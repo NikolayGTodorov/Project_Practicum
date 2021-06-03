@@ -15,7 +15,9 @@ public:
 	void addClient(ClientUser* client);
 	bool removeClient(std::string egn);
 
-	bool clientWithEgnExists(std::string egn);
+	bool clientWithEgnExists(std::string egn) const;
 	ClientUser* getClientByEgn(std::string egn) const;
+	bool clientHasAccountWithNumber(std::string ) const;
+
 };
 

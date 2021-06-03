@@ -9,5 +9,7 @@ class Account
 	double mBalance;
 	std::vector<Card*> mCards;
 public:
+	Account(std::string ownerEgn, std::string accountNumber, double balance);
+	std::string getAccountNumber() const;
 };
 
