@@ -19,6 +19,7 @@ public:
     virtual void serialize(std::ostream& os) override;
     virtual void deserialize(std::istream& is) override;
 
+    int getAccountsCount() const;
     void deposit(double amountToDeposit);
     void withdraw(double amountToWithdraw);
     double checkBalance();

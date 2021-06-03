@@ -30,6 +30,11 @@ void ClientUser::deserialize(std::istream& is)
 		>> mBirthDate.deserialize(is) >> mAddress >> '\n';*/
 }
 
+int ClientUser::getAccountsCount() const
+{
+	return mUserAccounts.size();
+}
+
 std::istream& operator>>(std::istream& is, ClientUser& client)
 {
 	is >> static_cast<User&>(client);

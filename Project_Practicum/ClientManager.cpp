@@ -45,3 +45,30 @@ bool ClientManager::removeClient(std::string egn)
 	}
 	return 0;
 }
+
+
+bool ClientManager::clientWithEgnExists(std::string egn)
+{
+	for (ClientUser* client : mClients) {
+		if (client->getUserEgn() == egn) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+ClientUser* ClientManager::getClientByEgn(std::string egn) const
+{
+	if (clientWithEgnExists(egn)) {
+		for (ClientUser* client : mClients) {
+			if (client->getUserEgn() == egn) {
+				return client;
+			}
+		}
+	}
+	else {
+		std::cout << "Couldn't find client with this egn\n";
+	}
+}
+
+

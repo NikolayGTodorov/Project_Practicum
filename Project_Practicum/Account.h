@@ -8,5 +8,6 @@ class Account
 	std::string mAccountNumber;
 	double mBalance;
 	std::vector<Card*> mCards;
+public:
 };
 
