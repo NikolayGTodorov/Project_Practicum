@@ -1,5 +1,6 @@
 #include "User.h"
 #include "EmployeeManager.h"
+#include "ClientManager.h"
 
 User::User(std::string egn, std::string firstName, std::string secondName, std::string lastName, BirthDate birthDate, std::string address) :
 	mEgn{ egn }, mFirstName{ firstName }, mSecondName{ secondName }, mLastName{ lastName }, mBirthDate{ birthDate },
@@ -28,10 +29,11 @@ bool containsDigitsOnly(const std::string& str) {
 std::istream& operator>>(std::istream& is, User& user)
 {
 	EmployeeManager* empManager = EmployeeManager::getEmployeeManagerInstance();
+	ClientManager* clientManager = ClientManager::getClientManagerInstance();
 	std::cout << "Enter egn: \n";
 	is >> user.mEgn;
 	if (user.mEgn.length() == 10 && containsDigitsOnly(user.mEgn)) {
-		if (empManager->checkEgnAlreadyRegistered(user.mEgn)) {
+		if (empManager->checkEgnAlreadyRegistered(user.mEgn) || clientManager->clientWithEgnExists(user.mEgn)) {
 			std::cout << "Egn already exists\n";
 			throw std::exception("Egn already exists\n");
 		}

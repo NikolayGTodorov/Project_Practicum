@@ -13,7 +13,7 @@ public:
 	static void releaseClientManagerInstance();
 
 	void addClient(ClientUser* client);
-	bool removeClient(std::string egn);
+	bool removeClientByEgn(std::string egn);
 
 	bool clientWithEgnExists(std::string egn) const;
 	ClientUser* getClientByEgn(std::string egn) const;

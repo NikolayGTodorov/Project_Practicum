@@ -54,19 +54,19 @@ void AccountManager::addAccount(std::string egn, double balance)
 
 bool AccountManager::removeAccount(std::string egn, std::string accountNumber)
 {
-	ClientManager* clientManager = ClientManager::getClientManagerInstance();
-	if (clientManager->clientWithEgnExists(egn)) {
-		if (accountWithNumberExists(accountNumber)) {
-			int index = 0;
-			for (Account* acc : mAccounts) {
-				index++;
-				if (acc->getAccountNumber() == accountNumber) {
-					delete mAccounts[index];
-					mAccounts.erase(mAccounts.begin() + index);
-					return 1;
-				}
+	if (accountWithNumberExists(accountNumber)) {
+		int index = 0;
+		for (Account* acc : mAccounts) {
+			index++;
+			if (acc->getAccountNumber() == accountNumber) {
+				delete mAccounts[index];
+				mAccounts.erase(mAccounts.begin() + index);
+				return 1;
 			}
 		}
 	}
-	return 0;
+	else {
+		return 0;
+	}
+	
 }

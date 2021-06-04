@@ -25,8 +25,8 @@ public:
     void addClient();
     void deleteClient();
     void openAccount();
-    void addCardToAccount();
     void closeAccount();
+    void addCardToAccount();
     void deleteCardFromAccount();
     void printClientsReport();
     void printIndividualReport();

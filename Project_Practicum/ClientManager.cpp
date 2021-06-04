@@ -32,7 +32,7 @@ void ClientManager::addClient(ClientUser* client)
 	mClients.push_back(new ClientUser(*client));
 }
 
-bool ClientManager::removeClient(std::string egn)
+bool ClientManager::removeClientByEgn(std::string egn)
 {
 	int index = 0;
 	for (ClientUser* client : mClients) {

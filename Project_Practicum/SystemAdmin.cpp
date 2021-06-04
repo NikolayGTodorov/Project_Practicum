@@ -34,6 +34,6 @@ void SystemAdmin::deleteEmployeeAccount()
 		std::cout << "Successfully deleted empoyee with EGN: " << egn << '\n';
 	}
 	else {
-		std::cout << "Couldn't find employee with this egn...";
+		std::cout << "Couldn't find employee with this egn...\n";
 	}
 }
