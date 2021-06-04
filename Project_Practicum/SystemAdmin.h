@@ -10,9 +10,9 @@ class SystemAdmin
 
 	static SystemAdmin* admin;
 	SystemAdmin();
-
 public:
 	static SystemAdmin* getSystemAdminInstance();
+	static void releaseSystemAdminInstance();
 	void addEmployeeAccount();
 	void deleteEmployeeAccount();
 };

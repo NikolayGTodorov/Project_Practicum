@@ -1,6 +1,7 @@
 #include "EmployeeUser.h"
 #include "ClientManager.h"
 #include "AccountManager.h"
+#include "CardManager.h"
 
 EmployeeUser::EmployeeUser(std::string username, std::string password, std::string egn, std::string firstName, std::string secondName, std::string lastName, BirthDate birthDate, std::string address, PhoneNumber phone) :
 	User(egn, firstName, secondName, lastName, birthDate, address),
@@ -8,7 +9,7 @@ EmployeeUser::EmployeeUser(std::string username, std::string password, std::stri
 {
 }
 
-EmployeeUser::EmployeeUser()
+EmployeeUser::EmployeeUser() : User()
 {
 }
 
@@ -30,7 +31,12 @@ void EmployeeUser::addClient()
 	ClientUser* client = new ClientUser();
 	std::cin >> *client;
 	ClientManager* clientManager = ClientManager::getClientManagerInstance();
-	clientManager->addClient(client);
+	if (!clientManager->clientWithEgnExists(client->getUserEgn())) {
+		clientManager->addClient(client);
+	}
+	else {
+		std::cout << "Client with such Egn already exists...\n";
+	}
 	delete client;
 }
 
@@ -60,7 +66,6 @@ void EmployeeUser::openAccount()
 		std::cin >> amount;
 		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
 		accountManager->addAccount(egn, amount);
-		std::cout << accountManager->generateAccountNumber(egn);
 	}
 	else {
 		std::cout << "There is not client with such egn in the system...\n";
@@ -80,6 +85,53 @@ void EmployeeUser::closeAccount()
 		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
 		if (accountManager->removeAccount(egn, accountNumber) == 0) {
 			std::cout << "This client does not have account with this number...\n";
+		}
+	}
+	else {
+		std::cout << "There is not client with such egn in the system...\n";
+	}
+}
+
+void EmployeeUser::addCardToAccount()
+{
+	std::string egn;
+	std::cout << "Enter egn of client: ";
+	std::cin >> egn;
+	ClientManager* clientManager = ClientManager::getClientManagerInstance();
+	if (clientManager->clientWithEgnExists(egn)) {
+		std::string accountNumber;
+		std::cout << "Enter account number in which the card should be created: ";
+		std::cin >> accountNumber;
+		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
+		if (accountManager->accountWithNumberExists(accountNumber)) {
+			CardManager* cardManager = CardManager::getCardManagerInstance();
+			cardManager->addCard(egn, accountNumber);
+		}
+		else {
+			std::cout << "Account with number: " << accountNumber << " does not exist...\n";
+		}
+	}
+	else {
+		std::cout << "Client with egn: " << egn << " does not exist...\n";
+	}
+}
+
+void EmployeeUser::deleteCardFromAccount()
+{
+	std::string egn;
+	std::cout << "Enter egn of client: ";
+	std::cin >> egn;
+	ClientManager* clientManager = ClientManager::getClientManagerInstance();
+	if (clientManager->clientWithEgnExists(egn)) {
+		std::string accountNumber;
+		std::string cardNumber;
+		std::cout << "Enter account number card is assigned to: ";
+		std::cin >> accountNumber;
+		std::cout << "Enter PIN of card to be removed: ";
+		std::cin >> cardNumber;
+		CardManager* cardManager = CardManager::getCardManagerInstance();
+		if (cardManager->removeCard(egn, accountNumber, cardNumber) == 0) {
+			std::cout << "Entered invalid account or card number...\n";
 		}
 	}
 	else {

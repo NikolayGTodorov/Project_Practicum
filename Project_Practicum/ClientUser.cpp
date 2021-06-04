@@ -52,4 +52,5 @@ int ClientUser::getCardsCount() const
 std::istream& operator>>(std::istream& is, ClientUser& client)
 {
 	is >> static_cast<User&>(client);
+	return is;
 }

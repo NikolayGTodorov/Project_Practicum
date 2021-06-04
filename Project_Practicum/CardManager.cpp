@@ -47,8 +47,8 @@ std::string CardManager::generateCardNumber(std::string egn)
 	ClientManager* clientManager = ClientManager::getClientManagerInstance();
 	
 	cardNumber = "00" + egn.substr(6, 10) + std::to_string(clientManager->getClientByEgn(egn)->getCardsCount());
+	return cardNumber;
 }
-
 short int CardManager::generateRandomPIN()
 {
 	srand(time(0));
@@ -57,7 +57,10 @@ short int CardManager::generateRandomPIN()
 
 void CardManager::addCard(std::string egn, std::string accountNumber)
 {
-	mCards.push_back(new Card(accountNumber, generateCardNumber(egn), generateRandomPIN());
+	short int pin = generateRandomPIN();
+	std::string cardNumber = generateCardNumber(egn);
+	mCards.push_back(new Card(accountNumber, cardNumber, pin));
+	std::cout << "Card number: " << cardNumber << " with PIN: " << pin << '\n';
 }
 
 bool CardManager::removeCard(std::string egn, std::string accountNumber, std::string cardNumber)
@@ -73,6 +76,7 @@ bool CardManager::removeCard(std::string egn, std::string accountNumber, std::st
 				return 1;
 			}
 		}
+		return 0;
 	}
 	else {
 		return 0;

@@ -15,12 +15,22 @@ SystemAdmin* SystemAdmin::getSystemAdminInstance()
 	return admin;
 }
 
+void SystemAdmin::releaseSystemAdminInstance()
+{
+	delete admin;
+}
+
 void SystemAdmin::addEmployeeAccount()
 {
 	EmployeeUser* emp = new EmployeeUser();
 	std::cin >> *emp;
 	EmployeeManager* empManager = EmployeeManager::getEmployeeManagerInstance();
-	empManager->addEmployee(emp);
+	if (!empManager->checkEgnAlreadyRegistered(emp->getUserEgn())) {
+		empManager->addEmployee(emp);
+	}
+	else {
+		std::cout << "Employee with such Egn already exists...\n";
+	}
 	delete emp;
 }
 
