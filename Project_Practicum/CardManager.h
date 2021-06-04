@@ -4,16 +4,23 @@
 #include "Card.h"
 class CardManager
 {
-	static CardManager* accountManager;
-	std::vector<Card*> accounts;
+	std::vector<Card*> mCards;
+	static CardManager* cardManager;
 	CardManager();
+	~CardManager();
 public:
 	static CardManager* getCardManagerInstance();
+	static void releaseCardManagerInstance();
 
 	void readCardsFromFile();
 	void writeCardsToFile();
 
-	std::string generateCardNumber();
+	bool cardWithNumberExists(std::string cardNumber);
+
+	std::string generateCardNumber(std::string egn);
 	short int generateRandomPIN();
+
+	void addCard(std::string egn, std::string accountNumber);
+	bool removeCard(std::string egn, std::string accountNumber, std::string cardNumber);
 };
 

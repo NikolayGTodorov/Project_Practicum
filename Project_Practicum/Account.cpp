@@ -6,7 +6,17 @@ Account::Account(std::string ownerEgn, std::string accountNumber, double balance
 	//fill cards...
 }
 
+std::string Account::getOwnerEgn() const
+{
+	return mOwnerEgn;
+}
+
 std::string Account::getAccountNumber() const
 {
 	return mAccountNumber;
+}
+
+int Account::getCardsCount() const
+{
+	return mCards.size();
 }

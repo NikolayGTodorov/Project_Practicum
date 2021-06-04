@@ -21,6 +21,7 @@ public:
 
     int getAccountsCount() const;
     std::vector<Account*> getAccounts() const;
+    int getCardsCount() const;
 
     void deposit(double amountToDeposit);
     void withdraw(double amountToWithdraw);

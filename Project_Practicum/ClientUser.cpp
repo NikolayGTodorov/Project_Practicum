@@ -40,6 +40,15 @@ std::vector<Account*> ClientUser::getAccounts() const
 	return mUserAccounts;
 }
 
+int ClientUser::getCardsCount() const
+{
+	int count = 0;
+	for (Account* acc : mUserAccounts) {
+		count += acc->getCardsCount();
+	}
+	return count;
+}
+
 std::istream& operator>>(std::istream& is, ClientUser& client)
 {
 	is >> static_cast<User&>(client);

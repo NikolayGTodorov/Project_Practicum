@@ -10,6 +10,8 @@ class Account
 	std::vector<Card*> mCards;
 public:
 	Account(std::string ownerEgn, std::string accountNumber, double balance);
+	std::string getOwnerEgn() const;
 	std::string getAccountNumber() const;
+	int getCardsCount() const;
 };
 

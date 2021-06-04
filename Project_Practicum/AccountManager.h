@@ -18,7 +18,8 @@ public:
 	std::string generateAccountNumber(std::string egn);
 	void addAccount(std::string egn, double balance);
 	bool removeAccount(std::string egn, std::string accountNumber);
-	void addCard();
-	void deleteCard();
+	
+	void addCardToAccount();
+	void deleteCardFromAccount();
 };
 

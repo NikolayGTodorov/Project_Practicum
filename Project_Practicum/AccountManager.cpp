@@ -58,7 +58,7 @@ bool AccountManager::removeAccount(std::string egn, std::string accountNumber)
 		int index = 0;
 		for (Account* acc : mAccounts) {
 			index++;
-			if (acc->getAccountNumber() == accountNumber) {
+			if (acc->getAccountNumber() == accountNumber && acc->getOwnerEgn() == egn) {
 				delete mAccounts[index];
 				mAccounts.erase(mAccounts.begin() + index);
 				return 1;
