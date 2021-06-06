@@ -47,7 +47,9 @@ void EmployeeUser::deleteClient()
 	std::cin >> egn;
 	ClientManager* clientManager = ClientManager::getClientManagerInstance();
 	if (clientManager->removeClientByEgn(egn) == 1) {
-		std::cout << "Successfully deleted client with EGN: " << egn << '\n';
+		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
+		accountManager->removeAllAccountsAndCardsWithEgn(egn);
+		std::cout << "Successfully deleted client with EGN: " << egn << "and all cards and accounts associated with it...\n";
 	}
 	else {
 		std::cout << "Couldn't find client with this egn...\n";
@@ -83,7 +85,11 @@ void EmployeeUser::closeAccount()
 	ClientManager* clientManager = ClientManager::getClientManagerInstance();
 	if (clientManager->clientWithEgnExists(egn)) {
 		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
-		if (accountManager->removeAccount(egn, accountNumber) == 0) {
+		if (accountManager->removeAccount(egn, accountNumber) == 1) {
+			CardManager* cardManager = CardManager::getCardManagerInstance();
+			cardManager->removeAllCardsFromAccount(accountNumber);
+		}
+		else {
 			std::cout << "This client does not have account with this number...\n";
 		}
 	}

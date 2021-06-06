@@ -1,5 +1,6 @@
 #include "AccountManager.h"
 #include "ClientManager.h"
+#include "CardManager.h"
 
 AccountManager* AccountManager::accountManager = 0;
 
@@ -73,6 +74,32 @@ bool AccountManager::removeAccount(std::string egn, std::string accountNumber)
 	}
 	else {
 		return 0;
+	}
+	
+}
+
+std::vector<Account*> AccountManager::getAllAccountsByEgn(std::string egn)
+{
+	std::vector<Account*> temp;
+	for (Account* account : mAccounts) {
+		if (account->getOwnerEgn() == egn) {
+			temp.push_back(account);
+		}
+	}
+	return temp;
+}
+
+void AccountManager::removeAllAccountsAndCardsWithEgn(std::string ownerEgn)
+{
+	CardManager* cardManager = CardManager::getCardManagerInstance();
+	int index = 0;
+	for (Account* account : mAccounts) {
+		index++;
+		if (account->getOwnerEgn() == ownerEgn) {
+			cardManager->removeAllCardsFromAccount(account->getAccountNumber());
+			delete mAccounts[index];
+			mAccounts.erase(mAccounts.begin() + index);
+		}
 	}
 	
 }

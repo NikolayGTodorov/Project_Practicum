@@ -82,3 +82,26 @@ bool CardManager::removeCard(std::string egn, std::string accountNumber, std::st
 		return 0;
 	}
 }
+
+int CardManager::getCardsCountByAccountNumber(std::string accountNumber) const
+{
+	int counter = 0;
+	for (Card* card : mCards) {
+		if (card->getAccountAssociatedWith() == accountNumber) {
+			counter++;
+		}
+	}
+	return counter;
+}
+
+void CardManager::removeAllCardsFromAccount(std::string account)
+{
+	int index = 0;
+	for (Card* card : mCards) {
+		index++;
+		if (card->getAccountAssociatedWith() == account) {
+			delete mCards[index];
+			mCards.erase(mCards.begin() + index);
+		}
+	}
+}

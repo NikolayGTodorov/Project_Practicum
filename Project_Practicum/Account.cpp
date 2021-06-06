@@ -1,9 +1,9 @@
 #include "Account.h"
+#include "CardManager.h"
 
 Account::Account(std::string ownerEgn, std::string accountNumber, double balance) :
 	mOwnerEgn{ ownerEgn }, mAccountNumber{ accountNumber }, mBalance{ balance }
 {
-	//fill cards...
 }
 
 std::string Account::getOwnerEgn() const
@@ -18,5 +18,8 @@ std::string Account::getAccountNumber() const
 
 int Account::getCardsCount() const
 {
-	return mCards.size();
+	CardManager* cardManager = CardManager::getCardManagerInstance();
+	return cardManager->getCardsCountByAccountNumber(mAccountNumber);
 }
+
+

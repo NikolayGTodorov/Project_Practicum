@@ -8,10 +8,8 @@ class ClientUser :
 {
     friend std::istream& operator>>(std::istream& is, ClientUser& client);
 
-    std::vector<Account*> mUserAccounts;
 public:
-    ClientUser(std::vector<Account*> userAccounts, 
-        std::string egn, std::string firstName, std::string secondName,
+    ClientUser(std::string egn, std::string firstName, std::string secondName,
         std::string lastName, BirthDate birthDate,
         std::string address);// check for =address
     ClientUser();

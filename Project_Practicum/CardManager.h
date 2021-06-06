@@ -22,5 +22,9 @@ public:
 
 	void addCard(std::string egn, std::string accountNumber);
 	bool removeCard(std::string egn, std::string accountNumber, std::string cardNumber);
+
+	int getCardsCountByAccountNumber(std::string accountNumber) const;
+
+	void removeAllCardsFromAccount(std::string account);
 };
 
