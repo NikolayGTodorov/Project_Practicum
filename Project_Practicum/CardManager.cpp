@@ -94,7 +94,7 @@ int CardManager::getCardsCountByAccountNumber(std::string accountNumber) const
 	return counter;
 }
 
-std::vector<Card*> CardManager::getAllCardsByAccountNumber(std::string accountNumber)
+const std::vector<Card*> CardManager::getAllCardsByAccountNumber(std::string accountNumber) const
 {
 	std::vector<Card*> temp;
 	for (Card* card : mCards) {

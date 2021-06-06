@@ -37,7 +37,7 @@ int ClientUser::getAccountsCount() const
 	return getAccounts().size();
 }
 
-std::vector<Account*> ClientUser::getAccounts() const
+const std::vector<Account*> ClientUser::getAccounts() const
 {
 	AccountManager* accountManager = AccountManager::getAccountManagerInstance();
 	return accountManager->getAllAccountsByEgn(mEgn);

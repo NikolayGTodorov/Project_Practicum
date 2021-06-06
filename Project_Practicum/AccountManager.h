@@ -19,7 +19,7 @@ public:
 	void addAccount(std::string egn, double balance);
 	bool removeAccount(std::string egn, std::string accountNumber);
 
-	std::vector<Account*> getAllAccountsByEgn(std::string egn);
+	const std::vector<Account*> getAllAccountsByEgn(std::string egn) const;
 	
 	void removeAllAccountsAndCardsWithEgn(std::string ownerEgn);
 	//void addCardToAccount();

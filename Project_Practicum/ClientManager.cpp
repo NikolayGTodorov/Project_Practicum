@@ -46,7 +46,7 @@ bool ClientManager::removeClientByEgn(std::string egn)
 	return 0;
 }
 
-std::vector<ClientUser*> ClientManager::getClientsVector() const
+const std::vector<ClientUser*> ClientManager::getClientsVector() const
 {
 	return mClients;
 }

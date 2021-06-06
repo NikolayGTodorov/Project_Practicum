@@ -19,7 +19,7 @@ public:
     virtual void deserialize(std::istream& is) override;
 
     int getAccountsCount() const;
-    std::vector<Account*> getAccounts() const;
+    const std::vector<Account*> getAccounts() const;
     int getCardsCount() const;
 
     void deposit(double amountToDeposit);
@@ -28,4 +28,4 @@ public:
 };
 
 std::istream& operator>>(std::istream& is, ClientUser& client);
-std::ostream& operator<<(std::ostream& os, ClientUser& client)
+std::ostream& operator<<(std::ostream& os, ClientUser& client);

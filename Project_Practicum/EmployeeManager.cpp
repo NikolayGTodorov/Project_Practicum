@@ -31,10 +31,10 @@ void EmployeeManager::releaseEmployeeManagerInstance()
 	delete employeeManager;
 }
 
-std::vector<EmployeeUser*>& EmployeeManager::getEmployees()
-{
-	return mEmployees;
-}
+//std::vector<EmployeeUser*>& EmployeeManager::getEmployees()
+//{
+//	return mEmployees;
+//}
 
 bool EmployeeManager::checkEgnAlreadyRegistered(std::string egnToCheck) const
 {

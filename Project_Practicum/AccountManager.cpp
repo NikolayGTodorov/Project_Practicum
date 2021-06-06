@@ -78,7 +78,7 @@ bool AccountManager::removeAccount(std::string egn, std::string accountNumber)
 	
 }
 
-std::vector<Account*> AccountManager::getAllAccountsByEgn(std::string egn)
+const std::vector<Account*> AccountManager::getAllAccountsByEgn(std::string egn) const
 {
 	std::vector<Account*> temp;
 	for (Account* account : mAccounts) {

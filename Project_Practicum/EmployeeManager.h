@@ -14,7 +14,7 @@ class EmployeeManager
 public:
 	static EmployeeManager* getEmployeeManagerInstance();
 	static void releaseEmployeeManagerInstance();
-	std::vector<EmployeeUser*>& getEmployees();
+	//std::vector<EmployeeUser*>& getEmployees();
 	bool checkEgnAlreadyRegistered(std::string egnToCheck) const;
 
 	void addEmployee(EmployeeUser* user);
