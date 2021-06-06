@@ -46,6 +46,11 @@ bool ClientManager::removeClientByEgn(std::string egn)
 	return 0;
 }
 
+std::vector<ClientUser*> ClientManager::getClientsVector() const
+{
+	return mClients;
+}
+
 
 bool ClientManager::clientWithEgnExists(std::string egn) const
 {

@@ -52,3 +52,11 @@ std::istream& operator>>(std::istream& is, User& user)
 
 	return is;
 }
+
+std::ostream& operator<<(std::ostream& os, User& user)
+{
+	os << "EGN: " << user.mEgn << "\nName: " << user.mFirstName << " " << user.mSecondName
+		<< " " << user.mLastName << "\nBirthday: " << user.mBirthDate << "\nAddress: " 
+		<< user.mAddress << '\n';
+	return os;
+}

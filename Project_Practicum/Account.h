@@ -12,5 +12,6 @@ public:
 	std::string getOwnerEgn() const;
 	std::string getAccountNumber() const;
 	int getCardsCount() const;
+	double getBalance() const;
 };
 

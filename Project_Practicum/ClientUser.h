@@ -7,6 +7,7 @@ class ClientUser :
     public User, public ISerializable
 {
     friend std::istream& operator>>(std::istream& is, ClientUser& client);
+    friend std::ostream& operator<<(std::ostream& os, ClientUser& client);
 
 public:
     ClientUser(std::string egn, std::string firstName, std::string secondName,
@@ -27,3 +28,4 @@ public:
 };
 
 std::istream& operator>>(std::istream& is, ClientUser& client);
+std::ostream& operator<<(std::ostream& os, ClientUser& client)

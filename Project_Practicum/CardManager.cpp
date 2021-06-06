@@ -94,6 +94,17 @@ int CardManager::getCardsCountByAccountNumber(std::string accountNumber) const
 	return counter;
 }
 
+std::vector<Card*> CardManager::getAllCardsByAccountNumber(std::string accountNumber)
+{
+	std::vector<Card*> temp;
+	for (Card* card : mCards) {
+		if (card->getAccountAssociatedWith() == accountNumber) {
+			temp.push_back(card);
+		}
+	}
+	return temp;
+}
+
 void CardManager::removeAllCardsFromAccount(std::string account)
 {
 	int index = 0;

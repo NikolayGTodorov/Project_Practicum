@@ -9,6 +9,6 @@ public:
 	Card(std::string accountAssociatedWith, std::string cardNumber, short int pin);
 	std::string getAccountAssociatedWith() const;
 	std::string getCardNumber() const;
-	std::string getPin() const;
+	short int getPin() const;
 };
 

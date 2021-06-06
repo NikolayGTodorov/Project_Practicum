@@ -14,3 +14,8 @@ std::string Card::getCardNumber() const
 {
 	return mCardNumber;
 }
+
+short int Card::getPin() const
+{
+	return mPin;
+}

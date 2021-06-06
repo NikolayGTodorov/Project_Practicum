@@ -15,9 +15,10 @@ public:
 	void addClient(ClientUser* client);
 	bool removeClientByEgn(std::string egn);
 
+	std::vector<ClientUser*> getClientsVector() const;
+
 	bool clientWithEgnExists(std::string egn) const;
 	ClientUser* getClientByEgn(std::string egn) const;
-	bool clientHasAccountWithNumber(std::string ) const;
 
 };
 

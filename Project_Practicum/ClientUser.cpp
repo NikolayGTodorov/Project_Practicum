@@ -1,5 +1,6 @@
 #include "ClientUser.h"
 #include "AccountManager.h"
+#include "CardManager.h"
 
 ClientUser::ClientUser(std::string egn, std::string firstName, std::string secondName, std::string lastName, BirthDate birthDate, std::string address) :
 	User(egn, firstName, secondName, lastName, birthDate, address)
@@ -55,4 +56,27 @@ std::istream& operator>>(std::istream& is, ClientUser& client)
 {
 	is >> static_cast<User&>(client);
 	return is;
+}
+
+std::ostream& operator<<(std::ostream& os, ClientUser& client)
+{
+	os << static_cast<User&>(client);
+	os << "Number of accounts: " << client.getAccountsCount() << '\n';
+	AccountManager* accountManager = AccountManager::getAccountManagerInstance();
+	CardManager* cardManager = CardManager::getCardManagerInstance();
+	int index = 0;
+	int innerIndex = 0;
+	for (Account* account : accountManager->getAllAccountsByEgn(client.getUserEgn())) {
+		index++;
+		os << "Account" << index << '\n';
+		os << "Account Number: " << account->getAccountNumber() << '\n'
+			<< "Balance: " << account->getBalance() << '\n'
+			<< "Number of cards: " << account->getCardsCount() << '\n';
+		for (Card* card : cardManager->getAllCardsByAccountNumber(account->getAccountNumber())) {
+			innerIndex++;
+			os << "Card" << innerIndex << '\n';
+			os << "Card number: " << card->getCardNumber() << "\nPIN: " << card->getPin() << '\n';
+		}
+	}
+	return os;
 }

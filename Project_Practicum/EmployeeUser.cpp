@@ -145,6 +145,31 @@ void EmployeeUser::deleteCardFromAccount()
 	}
 }
 
+void EmployeeUser::printClientsReport()
+{
+	int index = 0;
+	ClientManager* clientManager = ClientManager::getClientManagerInstance();
+	for (ClientUser* client : clientManager->getClientsVector()) {
+		index++;
+		std::cout << index << ". EGN: " << client->getUserEgn()
+			<< "\n Accounts count: " << client->getAccountsCount()
+			<< "\n  Cards count: " << client->getCardsCount() << "\n\n";
+	}
+}
+
+void EmployeeUser::printIndividualReport()
+{
+	std::string egn;
+	std::cin >> egn;
+	ClientManager* clientManager = ClientManager::getClientManagerInstance();
+	if (clientManager->clientWithEgnExists(egn)) {
+		std::cout << *(clientManager->getClientByEgn(egn));
+	}
+	else {
+		std::cout << "Client with such EGN does not exist...\n";
+	}
+}
+
 std::istream& operator>>(std::istream& is, EmployeeUser& empUser)
 {
 	std::cout << "Enter username: \n";

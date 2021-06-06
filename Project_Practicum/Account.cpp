@@ -22,4 +22,9 @@ int Account::getCardsCount() const
 	return cardManager->getCardsCountByAccountNumber(mAccountNumber);
 }
 
+double Account::getBalance() const
+{
+	return mBalance;
+}
+
 

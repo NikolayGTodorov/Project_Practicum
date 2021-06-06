@@ -5,6 +5,7 @@
 class User
 {
 	friend std::istream& operator >>(std::istream& is, User& user);
+	friend std::ostream& operator<<(std::ostream& os, User& user);
 protected:
 	std::string mEgn;
 	std::string mFirstName;
@@ -21,4 +22,4 @@ public:
 };
 
 std::istream& operator >>(std::istream& is, User& user);
-
+std::ostream& operator<<(std::ostream& os, User& user);

@@ -25,6 +25,8 @@ public:
 
 	int getCardsCountByAccountNumber(std::string accountNumber) const;
 
+	std::vector<Card*> getAllCardsByAccountNumber(std::string accountNumber);
+
 	void removeAllCardsFromAccount(std::string account);
 };
 
