@@ -27,4 +27,9 @@ double Account::getBalance() const
 	return mBalance;
 }
 
+void Account::addBalance(double toAdd)
+{
+	mBalance += toAdd;
+}
+
 

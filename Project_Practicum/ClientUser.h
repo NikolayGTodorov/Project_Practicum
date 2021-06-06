@@ -22,9 +22,9 @@ public:
     const std::vector<Account*> getAccounts() const;
     int getCardsCount() const;
 
-    void deposit(double amountToDeposit);
-    void withdraw(double amountToWithdraw);
-    double checkBalance();
+    void deposit(std::string accountNumber);
+    void withdraw(std::string accountNumber);
+    double checkBalance(std::string accountNumber);
 };
 
 std::istream& operator>>(std::istream& is, ClientUser& client);

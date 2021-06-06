@@ -19,6 +19,10 @@ public:
 	void addAccount(std::string egn, double balance);
 	bool removeAccount(std::string egn, std::string accountNumber);
 
+	void addCashToAccount(std::string accountNumber, double toAdd);
+	void substractCashToAccount(std::string accountNumber, double toWithdraw);
+	double getAccountBalanceByNumber(std::string accountNumber) const;
+
 	const std::vector<Account*> getAllAccountsByEgn(std::string egn) const;
 	
 	void removeAllAccountsAndCardsWithEgn(std::string ownerEgn);

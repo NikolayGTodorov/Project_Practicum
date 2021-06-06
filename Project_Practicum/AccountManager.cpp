@@ -78,6 +78,35 @@ bool AccountManager::removeAccount(std::string egn, std::string accountNumber)
 	
 }
 
+void AccountManager::addCashToAccount(std::string accountNumber, double toAdd)
+{
+	for (Account* account : mAccounts) {
+		if (account->getAccountNumber() == accountNumber) {
+			account->addBalance(toAdd);
+			break;
+		}
+	}
+}
+
+void AccountManager::substractCashToAccount(std::string accountNumber, double toWithdraw)
+{
+	for (Account* account : mAccounts) {
+		if (account->getAccountNumber() == accountNumber) {
+			account->addBalance(-toWithdraw);
+			break;
+		}
+	}
+}
+
+double AccountManager::getAccountBalanceByNumber(std::string accountNumber) const
+{
+	for (Account* account : mAccounts) {
+		if (account->getAccountNumber() == accountNumber) {
+			return account->getBalance();
+		}
+	}
+}
+
 const std::vector<Account*> AccountManager::getAllAccountsByEgn(std::string egn) const
 {
 	std::vector<Account*> temp;

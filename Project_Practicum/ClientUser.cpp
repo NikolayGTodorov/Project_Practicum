@@ -52,6 +52,41 @@ int ClientUser::getCardsCount() const
 	return count;
 }
 
+void ClientUser::deposit(std::string accountNumber)
+{
+	double toAdd;
+	std::cin >> toAdd;
+	if (toAdd > 0) {
+		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
+		accountManager->addCashToAccount(accountNumber, toAdd);
+		std::cout << "Successfully added " << toAdd << " to your account!\n";
+	}
+	else {
+		std::cout << "You can only deposit positive amount...\n";
+	}
+
+}
+
+void ClientUser::withdraw(std::string accountNumber)
+{
+	double toWithdraw;
+	std::cin >> toWithdraw;
+	if (toWithdraw > 0 && checkBalance(accountNumber) - toWithdraw > 0) {
+		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
+		accountManager->substractCashToAccount(accountNumber, toWithdraw);
+		std::cout << "Successfully withdrawed " << toWithdraw << " from your account!\n";
+	}
+	else {
+		std::cout << "Insufficient balance or non-positive input...\n";
+	}
+}
+
+double ClientUser::checkBalance(std::string accountNumber)
+{
+	AccountManager* accountManager = AccountManager::getAccountManagerInstance();
+	return accountManager->getAccountBalanceByNumber(accountNumber);
+}
+
 std::istream& operator>>(std::istream& is, ClientUser& client)
 {
 	is >> static_cast<User&>(client);

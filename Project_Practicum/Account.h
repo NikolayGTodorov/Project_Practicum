@@ -13,5 +13,6 @@ public:
 	std::string getAccountNumber() const;
 	int getCardsCount() const;
 	double getBalance() const;
+	void addBalance(double toAdd);
 };
 
