@@ -2,10 +2,22 @@
 
 void PhoneNumber::serialize(std::ostream& os)
 {
+	int phoneLength = mPhone.length();
+
+	os.write((const char*)&phoneLength, sizeof(int));
+	os.write(mPhone.c_str(), phoneLength);
 }
 
 void PhoneNumber::deserialize(std::istream& is)
 {
+	int phoneLength;
+	is.read((char*)&phoneLength, sizeof(int));
+	char* tempPhone = new char[phoneLength + 1];
+	is.read(tempPhone, phoneLength);
+	tempPhone[phoneLength] = '\0';
+	mPhone = tempPhone;
+
+	delete[] tempPhone;
 }
 
 PhoneNumber::PhoneNumber(std::string phone) : mPhone{ phone }

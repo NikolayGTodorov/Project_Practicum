@@ -45,6 +45,46 @@ void User::serialize(std::ostream& os)
 
 void User::deserialize(std::istream& is)
 {
+	int egnLength, firstNameLength, secondNameLength, lastNameLength, addressLength;
+
+	is.read((char*)&egnLength, sizeof(int));
+	char* tempEgn = new char[egnLength + 1];
+	is.read(tempEgn, egnLength);
+	tempEgn[egnLength] = '\0';
+	mEgn = tempEgn;
+
+	is.read((char*)&firstNameLength, sizeof(int));
+	char* tempFirstName = new char[firstNameLength + 1];
+	is.read(tempFirstName, firstNameLength);
+	tempFirstName[firstNameLength] = '\0';
+	mFirstName = tempFirstName;
+
+	is.read((char*)&secondNameLength, sizeof(int));
+	char* tempSecondName = new char[secondNameLength + 1];
+	is.read(tempSecondName, secondNameLength);
+	tempSecondName[secondNameLength] = '\0';
+	mSecondName = tempSecondName;
+
+	is.read((char*)&lastNameLength, sizeof(int));
+	char* tempLastName = new char[lastNameLength + 1];
+	is.read(tempLastName, lastNameLength);
+	tempLastName[lastNameLength] = '\0';
+	mLastName = tempLastName;
+
+	mBirthDate.deserialize(is);
+
+	is.read((char*)&addressLength, sizeof(int));
+	char* tempAddress = new char[addressLength + 1];
+	is.read(tempAddress, addressLength);
+	tempAddress[addressLength] = '\0';
+	mAddress = tempAddress;
+
+
+	delete[] tempAddress;
+	delete[] tempEgn;
+	delete[] tempFirstName;
+	delete[] tempLastName;
+	delete[] tempSecondName;
 }
 
 bool containsDigitsOnly(const std::string& str) {

@@ -15,15 +15,39 @@ EmployeeUser::EmployeeUser() : User()
 
 void EmployeeUser::serialize(std::ostream& os)
 {
-	os << mUsername << mPassword << mEgn << mFirstName
-		<< mSecondName << mLastName << mBirthDate.serialize(os) << mPhoneNumber << '\n';
+	int usernameLength = mUsername.length();
+	int passwordLength = mPassword.length();
+
+	os.write((const char*)&usernameLength, sizeof(int));
+	os.write(mUsername.c_str(), usernameLength);
+	os.write((const char*)&passwordLength, sizeof(int));
+	os.write(mPassword.c_str(), passwordLength);
+	static_cast<User&>(*this).serialize(os);
+	mPhoneNumber.serialize(os);
 }
 
 void EmployeeUser::deserialize(std::istream& is)
 {
-	////maybe add legth of strings?
-	//is >> mUsername >> mPassword >> mEgn >> mFirstName
-	//	>> mSecondName >> mLastName >> mBirthDate >> mPhoneNumber >> '\n';
+	int usernameLength;
+	int passwordLength;
+
+	is.read((char*)&usernameLength, sizeof(int));
+	char* tempUsername = new char[usernameLength + 1];
+	is.read(tempUsername, usernameLength);
+	tempUsername[usernameLength] = '\0';
+	mUsername = tempUsername;
+
+	is.read((char*)&passwordLength, sizeof(int));
+	char* tempPassword = new char[passwordLength + 1];
+	is.read(tempPassword, passwordLength);
+	tempPassword[passwordLength] = '\0';
+	mPassword = tempPassword;
+
+	static_cast<User&>(*this).deserialize(is);
+	mPhoneNumber.deserialize(is);
+
+	delete[] tempUsername;
+	delete[] tempPassword;
 }
 
 void EmployeeUser::addClient()

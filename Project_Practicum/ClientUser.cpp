@@ -13,23 +13,12 @@ ClientUser::ClientUser() : User()
 
 void ClientUser::serialize(std::ostream& os)
 {
-	//for (Account* acc : mUserAccounts) {
-	//	// os << accountsCount??
-	//	os << acc;
-	//}
-	//os << mEgn << mFirstName << mSecondName << mLastName
-	//	<< mBirthDate << mAddress << '\n';
+	static_cast<User&>(*this).serialize(os);
 }
 
 void ClientUser::deserialize(std::istream& is)
 {
-	/*int counter;
-	is >> counter;
-	for (size_t i = 0; i < counter; i++) {
-		is >> mUserAccounts[i];
-	}
-	is >> mEgn >> mFirstName >> mSecondName >> mLastName
-		>> mBirthDate.deserialize(is) >> mAddress >> '\n';*/
+	static_cast<User&>(*this).deserialize(is);
 }
 
 int ClientUser::getAccountsCount() const
