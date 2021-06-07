@@ -2,7 +2,7 @@
 #include <vector>
 #include "Account.h"
 #include "ISerializable.h"
-class AccountManager
+class AccountManager : public ISerializable
 {
 	std::vector<Account*> mAccounts;
 	AccountManager();
@@ -26,6 +26,9 @@ public:
 	const std::vector<Account*> getAllAccountsByEgn(std::string egn) const;
 	
 	void removeAllAccountsAndCardsWithEgn(std::string ownerEgn);
+
+	virtual void serialize(std::ostream& os);
+	virtual void deserialize(std::istream& is);
 	//void addCardToAccount();
 	//void deleteCardFromAccount();
 };

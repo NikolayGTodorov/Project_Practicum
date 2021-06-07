@@ -72,10 +72,22 @@ bool BirthDate::validInput(std::string dateToValidate)
 
 void BirthDate::serialize(std::ostream& os)
 {
+	int birthdateLength = mDate.length();
+
+	os.write((const char*)&birthdateLength, sizeof(int));
+	os.write(mDate.c_str(), birthdateLength);
 }
 
 void BirthDate::deserialize(std::istream& is)
 {
+	int birthdateLength;
+	is.read((char*)&birthdateLength, sizeof(int));
+	char* tempDate = new char[birthdateLength + 1];
+	is.read(tempDate, birthdateLength);
+	tempDate[birthdateLength] = '\0';
+	mDate = tempDate;
+
+	delete[] tempDate;
 }
 
 std::istream& operator>>(std::istream& is, BirthDate& birthDate)

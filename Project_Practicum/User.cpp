@@ -17,6 +17,36 @@ std::string User::getUserEgn() const
 	return mEgn;
 }
 
+void User::serialize(std::ostream& os)
+{
+	int egnLength = mEgn.length();
+	int firstNameLength = mFirstName.length();
+	int secondNameLength = mSecondName.length();
+	int lastNameLength = mLastName.length();
+	int addressLength = mAddress.length();
+
+	os.write((const char*)&egnLength, sizeof(int));
+	os.write(mEgn.c_str(), egnLength);
+
+	os.write((const char*)&firstNameLength, sizeof(int));
+	os.write(mFirstName.c_str(), firstNameLength);
+
+	os.write((const char*)&secondNameLength, sizeof(int));
+	os.write(mSecondName.c_str(), secondNameLength);
+
+	os.write((const char*)&lastNameLength, sizeof(int));
+	os.write(mLastName.c_str(), lastNameLength);
+
+	mBirthDate.serialize(os);
+
+	os.write((const char*)&addressLength, sizeof(int));
+	os.write(mAddress.c_str(), addressLength);
+}
+
+void User::deserialize(std::istream& is)
+{
+}
+
 bool containsDigitsOnly(const std::string& str) {
 	for (char c : str) {
 		if (!std::isdigit(c)) {

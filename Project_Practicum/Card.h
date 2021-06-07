@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
-class Card
+#include "ISerializable.h"
+
+class Card : public ISerializable
 {
 	std::string mAccountAssociatedWith;
 	std::string mCardNumber;
@@ -10,5 +12,9 @@ public:
 	std::string getAccountAssociatedWith() const;
 	std::string getCardNumber() const;
 	short int getPin() const;
+
+	// Inherited via ISerializable
+	virtual void serialize(std::ostream& os) override;
+	virtual void deserialize(std::istream& is) override;
 };
 

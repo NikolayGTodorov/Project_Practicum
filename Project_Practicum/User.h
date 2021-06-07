@@ -2,7 +2,7 @@
 #include "ISerializable.h"
 #include "BirthDate.h"
 #include <iostream>
-class User
+class User : public ISerializable
 {
 	friend std::istream& operator >>(std::istream& is, User& user);
 	friend std::ostream& operator<<(std::ostream& os, User& user);
@@ -19,6 +19,10 @@ protected:
 	User();
 public:
 	std::string getUserEgn() const;
+
+	// Inherited via ISerializable
+	virtual void serialize(std::ostream& os) override;
+	virtual void deserialize(std::istream& is) override;
 };
 
 std::istream& operator >>(std::istream& is, User& user);

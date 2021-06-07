@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
 #include "Card.h"
+#include "ISerializable.h"
 #include <vector>
-class Account
+class Account : public ISerializable
 {
 	std::string mOwnerEgn;
 	std::string mAccountNumber;
@@ -14,5 +15,8 @@ public:
 	int getCardsCount() const;
 	double getBalance() const;
 	void addBalance(double toAdd);
+
+	virtual void serialize(std::ostream& os) override;
+	virtual void deserialize(std::istream& is) override;
 };
 

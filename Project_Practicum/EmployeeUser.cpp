@@ -16,7 +16,7 @@ EmployeeUser::EmployeeUser() : User()
 void EmployeeUser::serialize(std::ostream& os)
 {
 	os << mUsername << mPassword << mEgn << mFirstName
-		<< mSecondName << mLastName << mBirthDate << mPhoneNumber << '\n';
+		<< mSecondName << mLastName << mBirthDate.serialize(os) << mPhoneNumber << '\n';
 }
 
 void EmployeeUser::deserialize(std::istream& is)
