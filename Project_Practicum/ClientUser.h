@@ -4,7 +4,7 @@
 #include "Account.h"
 #include "User.h"
 class ClientUser :
-    public User, public ISerializable
+    public User
 {
     friend std::istream& operator>>(std::istream& is, ClientUser& client);
     friend std::ostream& operator<<(std::ostream& os, ClientUser& client);

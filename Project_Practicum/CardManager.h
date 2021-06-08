@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include "Card.h"
-class CardManager
+class CardManager : public ISerializable
 {
 	std::vector<Card*> mCards;
 	static CardManager* cardManager;
@@ -16,6 +16,7 @@ public:
 	void writeCardsToFile();
 
 	bool cardWithNumberExists(std::string cardNumber);
+	Card* getCardByNumber(std::string cardNumber);
 
 	std::string generateCardNumber(std::string egn);
 	short int generateRandomPIN();
@@ -28,5 +29,9 @@ public:
 	const std::vector<Card*> getAllCardsByAccountNumber(std::string accountNumber) const;
 
 	void removeAllCardsFromAccount(std::string account);
+
+	// Inherited via ISerializable
+	virtual void serialize(std::ostream& os) override;
+	virtual void deserialize(std::istream& is) override;
 };
 

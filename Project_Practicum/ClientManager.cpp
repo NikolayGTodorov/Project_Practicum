@@ -36,12 +36,12 @@ bool ClientManager::removeClientByEgn(std::string egn)
 {
 	int index = 0;
 	for (ClientUser* client : mClients) {
-		index++;
 		if (client->getUserEgn() == egn) {
 			delete mClients[index];
 			mClients.erase(mClients.begin() + index);
 			return 1;
 		}
+		index++;
 	}
 	return 0;
 }
@@ -49,6 +49,17 @@ bool ClientManager::removeClientByEgn(std::string egn)
 const std::vector<ClientUser*> ClientManager::getClientsVector() const
 {
 	return mClients;
+}
+
+ClientUser* ClientManager::getClientUserByAccountNumber(std::string accountNumber) const
+{
+	for (ClientUser* client : mClients) {
+		for (Account* account : client->getAccounts()) {
+			if (account->getAccountNumber() == accountNumber) {
+				return client;
+			}
+		}
+	}
 }
 
 
@@ -73,6 +84,27 @@ ClientUser* ClientManager::getClientByEgn(std::string egn) const
 	}
 	else {
 		std::cout << "Couldn't find client with this egn\n";
+	}
+}
+
+void ClientManager::serialize(std::ostream& os)
+{
+	int vectorSize = mClients.size();
+	os.write((const char*)&vectorSize, sizeof(int));
+	for (int i = 0; i < vectorSize; i++) {
+		mClients[i]->serialize(os);
+	}
+}
+
+void ClientManager::deserialize(std::istream& is)
+{
+	int size;
+	mClients.clear();
+	is.read((char*)&size, sizeof(int));
+	mClients.resize(size + 1);
+	for (int i = 0; i < size; i++) {
+		mClients[i] = new ClientUser();
+		mClients[i]->deserialize(is);
 	}
 }
 

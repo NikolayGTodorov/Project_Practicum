@@ -8,7 +8,8 @@ User::User(std::string egn, std::string firstName, std::string secondName, std::
 {
 }
 
-User::User()
+User::User() : 
+	mEgn{ "" }, mFirstName{ "" }, mSecondName{ "" }, mLastName{ "" }, mBirthDate{ "" }, mAddress{ "" }
 {
 }
 
@@ -114,7 +115,6 @@ std::istream& operator>>(std::istream& is, User& user)
 	is >> user.mSecondName;
 	std::cout << "Input last name: \n";
 	is >> user.mLastName;
-	std::cout << "Input date of birth: \n";
 	is >> user.mBirthDate;
 	std::cin.ignore(256, '\n');
 	std::cout << "Input an address: \n";

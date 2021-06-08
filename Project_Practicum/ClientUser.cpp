@@ -91,15 +91,15 @@ std::ostream& operator<<(std::ostream& os, ClientUser& client)
 	int index = 0;
 	int innerIndex = 0;
 	for (Account* account : accountManager->getAllAccountsByEgn(client.getUserEgn())) {
-		index++;
 		os << "Account" << index << '\n';
 		os << "Account Number: " << account->getAccountNumber() << '\n'
 			<< "Balance: " << account->getBalance() << '\n'
 			<< "Number of cards: " << account->getCardsCount() << '\n';
+		index++;
 		for (Card* card : cardManager->getAllCardsByAccountNumber(account->getAccountNumber())) {
-			innerIndex++;
 			os << "Card" << innerIndex << '\n';
 			os << "Card number: " << card->getCardNumber() << "\nPIN: " << card->getPin() << '\n';
+			innerIndex++;
 		}
 	}
 	return os;

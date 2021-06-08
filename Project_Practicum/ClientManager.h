@@ -2,7 +2,7 @@
 #include <vector>
 #include "ClientUser.h"
 
-class ClientManager
+class ClientManager : public ISerializable
 {
 	std::vector<ClientUser*> mClients;
 
@@ -17,9 +17,16 @@ public:
 	bool removeClientByEgn(std::string egn);
 
 	const std::vector<ClientUser*> getClientsVector() const;
+	ClientUser* getClientUserByAccountNumber(std::string accountNumber) const;
 
 	bool clientWithEgnExists(std::string egn) const;
 	ClientUser* getClientByEgn(std::string egn) const;
+
+
+	// Inherited via ISerializable
+	virtual void serialize(std::ostream& os) override;
+
+	virtual void deserialize(std::istream& is) override;
 
 };
 

@@ -41,6 +41,15 @@ bool CardManager::cardWithNumberExists(std::string cardNumber)
 	return 0;
 }
 
+Card* CardManager::getCardByNumber(std::string cardNumber)
+{
+	for (Card* card : mCards) {
+		if (card->getCardNumber() == cardNumber) {
+			return card;
+		}
+	}
+}
+
 std::string CardManager::generateCardNumber(std::string egn)
 {
 	std::string cardNumber;
@@ -69,12 +78,12 @@ bool CardManager::removeCard(std::string egn, std::string accountNumber, std::st
 	if (accountManager->accountWithNumberExists(accountNumber) && cardWithNumberExists(cardNumber)) {
 		int index = 0;
 		for (Card* card : mCards) {
-			index++;
 			if (card->getCardNumber() == cardNumber && card->getAccountAssociatedWith() == accountNumber) {
 				delete mCards[index];
 				mCards.erase(mCards.begin() + index);
 				return 1;
 			}
+			index++;
 		}
 		return 0;
 	}
@@ -109,10 +118,31 @@ void CardManager::removeAllCardsFromAccount(std::string account)
 {
 	int index = 0;
 	for (Card* card : mCards) {
-		index++;
 		if (card->getAccountAssociatedWith() == account) {
 			delete mCards[index];
 			mCards.erase(mCards.begin() + index);
 		}
+		index++;
+	}
+}
+
+void CardManager::serialize(std::ostream& os)
+{
+	int vectorSize = mCards.size();
+	os.write((const char*)&vectorSize, sizeof(int));
+	for (int i = 0; i < vectorSize; i++) {
+		mCards[i]->serialize(os);
+	}
+}
+
+void CardManager::deserialize(std::istream& is)
+{
+	int size;
+	mCards.clear();
+	is.read((char*)&size, sizeof(int));
+	mCards.resize(size + 1);
+	for (int i = 0; i < size; i++) {
+		mCards[i] = new Card("", "", 0000);
+		mCards[i]->deserialize(is);
 	}
 }

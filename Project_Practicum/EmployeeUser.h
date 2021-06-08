@@ -6,7 +6,7 @@
 #include "EmployeeManager.h"
 
 class EmployeeUser :
-    public User, public ISerializable
+    public User
 {
     friend std::istream& operator>>(std::istream& is, EmployeeUser& empUser);
     std::string mUsername;
@@ -18,6 +18,9 @@ public:
         std::string lastName, BirthDate birthDate,
         std::string address,PhoneNumber phone);
     EmployeeUser();
+
+    std::string getUsername() const;
+    std::string getPassword() const;
 
     virtual void serialize(std::ostream& os) override;
     virtual void deserialize(std::istream& is) override;

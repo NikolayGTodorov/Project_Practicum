@@ -46,6 +46,35 @@ bool EmployeeManager::checkEgnAlreadyRegistered(std::string egnToCheck) const
 	return 0;
 }
 
+bool EmployeeManager::employeeWithUserNameExist(std::string username)
+{
+	for (EmployeeUser* employee : mEmployees) {
+		if (employee->getUsername() == username) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+bool EmployeeManager::employeeWithPasswordExist(std::string password)
+{
+	for (EmployeeUser* employee : mEmployees) {
+		if (employee->getPassword() == password) {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+EmployeeUser* EmployeeManager::getUserByCredentials(std::string username, std::string password) 
+{
+	for (EmployeeUser* empUser : mEmployees) {
+		if (empUser->getUsername() == username && empUser->getPassword() == password) {
+			return empUser;
+		}
+	}
+}
+
 void EmployeeManager::addEmployee(EmployeeUser* user)
 {
 	mEmployees.push_back(new EmployeeUser(*user));
@@ -55,12 +84,33 @@ bool EmployeeManager::removeEmployeeByEgn(std::string egn)
 {
 	int index = 0;
 	for (EmployeeUser* empUser : mEmployees) {
-		index++;
 		if (empUser->getUserEgn() == egn) {
 			delete mEmployees[index];
 			mEmployees.erase(mEmployees.begin() + index);
 			return 1;
 		}
+		index++;
 	}
 	return 0;
+}
+
+void EmployeeManager::serialize(std::ostream& os)
+{
+	int vectorSize = mEmployees.size();
+	os.write((const char*)&vectorSize, sizeof(int));
+	for (int i = 0; i < vectorSize; i++) {
+		mEmployees[i]->serialize(os);
+	}
+}
+
+void EmployeeManager::deserialize(std::istream& is)
+{
+	int size;
+	mEmployees.clear();
+	is.read((char*)&size, sizeof(int));
+	mEmployees.resize(size + 1);
+	for (int i = 0; i < size; i++) {
+		mEmployees[i] = new EmployeeUser();
+		mEmployees[i]->deserialize(is);
+	}
 }

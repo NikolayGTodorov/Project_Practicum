@@ -5,7 +5,7 @@
 const short int LOWEST_YEAR = 1900;
 
 
-BirthDate::BirthDate()
+BirthDate::BirthDate() : mDate{""}
 {
 }
 

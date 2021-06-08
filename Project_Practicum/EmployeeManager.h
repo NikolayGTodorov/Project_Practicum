@@ -3,10 +3,9 @@
 #include <string>
 class EmployeeUser;
 
-class EmployeeManager
+class EmployeeManager : public ISerializable
 {
 	std::vector<EmployeeUser*> mEmployees;
-	//size_t initialEmployeesCount;
 
 	static EmployeeManager* employeeManager;
 	EmployeeManager();
@@ -17,7 +16,15 @@ public:
 	//std::vector<EmployeeUser*>& getEmployees();
 	bool checkEgnAlreadyRegistered(std::string egnToCheck) const;
 
+	bool employeeWithUserNameExist(std::string username);
+	bool employeeWithPasswordExist(std::string password);
+	EmployeeUser* getUserByCredentials(std::string username, std::string password);
+
 	void addEmployee(EmployeeUser* user);
 	bool removeEmployeeByEgn(std::string egn);
+
+	// Inherited via ISerializable
+	virtual void serialize(std::ostream& os) override;
+	virtual void deserialize(std::istream& is) override;
 };
 

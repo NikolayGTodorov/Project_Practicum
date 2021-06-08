@@ -9,8 +9,18 @@ EmployeeUser::EmployeeUser(std::string username, std::string password, std::stri
 {
 }
 
-EmployeeUser::EmployeeUser() : User()
+EmployeeUser::EmployeeUser() : User(), mUsername{ "" }, mPassword{ "" }, mPhoneNumber{ "" }
 {
+}
+
+std::string EmployeeUser::getUsername() const
+{
+	return mUsername;
+}
+
+std::string EmployeeUser::getPassword() const
+{
+	return mPassword;
 }
 
 void EmployeeUser::serialize(std::ostream& os)
@@ -174,10 +184,10 @@ void EmployeeUser::printClientsReport()
 	int index = 0;
 	ClientManager* clientManager = ClientManager::getClientManagerInstance();
 	for (ClientUser* client : clientManager->getClientsVector()) {
-		index++;
 		std::cout << index << ". EGN: " << client->getUserEgn()
 			<< "\n Accounts count: " << client->getAccountsCount()
 			<< "\n  Cards count: " << client->getCardsCount() << "\n\n";
+		index++;
 	}
 }
 

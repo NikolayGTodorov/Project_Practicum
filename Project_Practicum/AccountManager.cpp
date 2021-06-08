@@ -63,12 +63,12 @@ bool AccountManager::removeAccount(std::string egn, std::string accountNumber)
 	if (accountWithNumberExists(accountNumber)) {
 		int index = 0;
 		for (Account* acc : mAccounts) {
-			index++;
 			if (acc->getAccountNumber() == accountNumber && acc->getOwnerEgn() == egn) {
 				delete mAccounts[index];
 				mAccounts.erase(mAccounts.begin() + index);
 				return 1;
 			}
+			index++;
 		}
 		return 0;
 	}
@@ -123,12 +123,33 @@ void AccountManager::removeAllAccountsAndCardsWithEgn(std::string ownerEgn)
 	CardManager* cardManager = CardManager::getCardManagerInstance();
 	int index = 0;
 	for (Account* account : mAccounts) {
-		index++;
 		if (account->getOwnerEgn() == ownerEgn) {
 			cardManager->removeAllCardsFromAccount(account->getAccountNumber());
 			delete mAccounts[index];
 			mAccounts.erase(mAccounts.begin() + index);
 		}
+		index++;
 	}
 	
+}
+
+void AccountManager::serialize(std::ostream& os)
+{
+	int vectorSize = mAccounts.size();
+	os.write((const char*)&vectorSize, sizeof(int));
+	for (int i = 0; i < vectorSize; i++) {
+		mAccounts[i]->serialize(os);
+	}
+}
+
+void AccountManager::deserialize(std::istream& is)
+{
+	int size;
+	mAccounts.clear();
+	is.read((char*)&size, sizeof(int));
+	mAccounts.resize(size + 1);
+	for (int i = 0; i < size; i++) {
+		mAccounts[i] = new Account("", "", 0);
+		mAccounts[i]->deserialize(is);
+	}
 }
