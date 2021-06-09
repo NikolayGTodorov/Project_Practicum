@@ -2,7 +2,6 @@
 #include <string>
 #include <iostream>
 #include <time.h>
-const short int LOWEST_YEAR = 1900;
 
 
 BirthDate::BirthDate() : mDate{""}
@@ -39,7 +38,8 @@ bool BirthDate::validInput(std::string dateToValidate)
 {
 	std::string temp;
 	if (dateToValidate.length() != 10) {
-		throw std::invalid_argument("Enter valid input!");
+		std::cout << "Birthday is in format dd/mm/yyyy\n";
+		return 0;
 	}
 
 	bool validDay = 0;
@@ -52,7 +52,7 @@ bool BirthDate::validInput(std::string dateToValidate)
 
 	temp = dateToValidate.substr(6, 10);
 	int year = std::stoi(temp);
-	validYear = (year > now.tm_year + 1780 && year <= now.tm_year + 1900); //get the current year - 120
+	validYear = (year > now.tm_year + 1780 && year <= now.tm_year + 1900);
 	if (!validYear) {
 		return 0;
 	}
@@ -68,6 +68,11 @@ bool BirthDate::validInput(std::string dateToValidate)
 
 	return (validDay && validMonth && validYear);
 
+}
+
+std::string BirthDate::getDate() const
+{
+	return mDate;
 }
 
 void BirthDate::serialize(std::ostream& os)
@@ -94,8 +99,11 @@ std::istream& operator>>(std::istream& is, BirthDate& birthDate)
 {
 	std::cout << "Enter date in format mm/dd/yyyy: \n";
 	is >> birthDate.mDate;
-	if (!birthDate.validInput(birthDate.mDate)) {
-		throw std::invalid_argument("Enter valid birthday info");
-	}
 	return is;
+}
+
+std::ostream& operator<<(std::ostream& os, const BirthDate& birthDate)
+{
+	os << birthDate.mDate;
+	return os;
 }

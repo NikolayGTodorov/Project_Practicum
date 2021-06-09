@@ -9,7 +9,7 @@ EmployeeUser::EmployeeUser(std::string username, std::string password, std::stri
 {
 }
 
-EmployeeUser::EmployeeUser() : User(), mUsername{ "" }, mPassword{ "" }, mPhoneNumber{ "" }
+EmployeeUser::EmployeeUser() : User(), mUsername{ "" }, mPassword{ "" }, mPhoneNumber()
 {
 }
 
@@ -23,6 +23,11 @@ std::string EmployeeUser::getPassword() const
 	return mPassword;
 }
 
+std::string EmployeeUser::getPhoneNumber() const
+{
+	return mPhoneNumber.getPhone();
+}
+
 void EmployeeUser::serialize(std::ostream& os)
 {
 	int usernameLength = mUsername.length();
@@ -32,7 +37,7 @@ void EmployeeUser::serialize(std::ostream& os)
 	os.write(mUsername.c_str(), usernameLength);
 	os.write((const char*)&passwordLength, sizeof(int));
 	os.write(mPassword.c_str(), passwordLength);
-	static_cast<User&>(*this).serialize(os);
+	User::serialize(os);
 	mPhoneNumber.serialize(os);
 }
 
@@ -53,11 +58,20 @@ void EmployeeUser::deserialize(std::istream& is)
 	tempPassword[passwordLength] = '\0';
 	mPassword = tempPassword;
 
-	static_cast<User&>(*this).deserialize(is);
+	User::deserialize(is);
 	mPhoneNumber.deserialize(is);
 
 	delete[] tempUsername;
 	delete[] tempPassword;
+}
+
+bool containsDigitsOnly(const std::string& str) {
+	for (char c : str) {
+		if (!std::isdigit(c)) {
+			return 0;
+		}
+	}
+	return 1;
 }
 
 void EmployeeUser::addClient()
@@ -65,11 +79,22 @@ void EmployeeUser::addClient()
 	ClientUser* client = new ClientUser();
 	std::cin >> *client;
 	ClientManager* clientManager = ClientManager::getClientManagerInstance();
-	if (!clientManager->clientWithEgnExists(client->getUserEgn())) {
-		clientManager->addClient(client);
+	EmployeeManager* empManager = EmployeeManager::getEmployeeManagerInstance();
+
+	if (client->getUserEgn().length() == 10 && containsDigitsOnly(client->getUserEgn())) {
+		if (empManager->checkEgnAlreadyRegistered(client->getUserEgn()) || clientManager->clientWithEgnExists(client->getUserEgn())) {
+			std::cout << "User with such Egn already exists...\n";
+		}
+		if (!client->getBirthDate().validInput(client->getBirthDate().getDate())) {
+			std::cout << "Enter valid birthday info\n";
+		}
+		else {
+			std::cout << "Client created successfully.\n";
+			clientManager->addClient(client);
+		}
 	}
 	else {
-		std::cout << "Client with such Egn already exists...\n";
+		std::cout << "Enter valid egn (10 digits)\n";
 	}
 	delete client;
 }

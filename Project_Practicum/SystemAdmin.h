@@ -13,7 +13,11 @@ class SystemAdmin
 public:
 	static SystemAdmin* getSystemAdminInstance();
 	static void releaseSystemAdminInstance();
+
+
+
 	void addEmployeeAccount();
 	void deleteEmployeeAccount();
 };
 
+bool stringContainsDigitsOnly(const std::string& str);

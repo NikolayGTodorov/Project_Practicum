@@ -9,13 +9,18 @@ User::User(std::string egn, std::string firstName, std::string secondName, std::
 }
 
 User::User() : 
-	mEgn{ "" }, mFirstName{ "" }, mSecondName{ "" }, mLastName{ "" }, mBirthDate{ "" }, mAddress{ "" }
+	mEgn{ "" }, mFirstName{ "" }, mSecondName{ "" }, mLastName{ "" }, mBirthDate(), mAddress{ "" }
 {
 }
 
 std::string User::getUserEgn() const
 {
 	return mEgn;
+}
+
+BirthDate User::getBirthDate() const
+{
+	return mBirthDate;
 }
 
 void User::serialize(std::ostream& os)
@@ -88,27 +93,12 @@ void User::deserialize(std::istream& is)
 	delete[] tempSecondName;
 }
 
-bool containsDigitsOnly(const std::string& str) {
-	for (char c : str) {
-		if (!std::isdigit(c)) {
-			return 0;
-		}
-	}
-	return 1;
-}
-
 std::istream& operator>>(std::istream& is, User& user)
 {
 	EmployeeManager* empManager = EmployeeManager::getEmployeeManagerInstance();
 	ClientManager* clientManager = ClientManager::getClientManagerInstance();
 	std::cout << "Enter egn: \n";
 	is >> user.mEgn;
-	if (user.mEgn.length() == 10 && containsDigitsOnly(user.mEgn)) {
-		if (empManager->checkEgnAlreadyRegistered(user.mEgn) || clientManager->clientWithEgnExists(user.mEgn)) {
-			std::cout << "Egn already exists\n";
-			throw std::exception("Egn already exists\n");
-		}
-	}
 	std::cout << "Input first name: \n";
 	is >> user.mFirstName;
 	std::cout << "Input middle name: \n";
@@ -123,7 +113,7 @@ std::istream& operator>>(std::istream& is, User& user)
 	return is;
 }
 
-std::ostream& operator<<(std::ostream& os, User& user)
+std::ostream& operator<<(std::ostream& os,const User& user)
 {
 	os << "EGN: " << user.mEgn << "\nName: " << user.mFirstName << " " << user.mSecondName
 		<< " " << user.mLastName << "\nBirthday: " << user.mBirthDate << "\nAddress: " 

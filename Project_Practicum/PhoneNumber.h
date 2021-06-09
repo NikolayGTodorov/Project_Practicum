@@ -12,7 +12,10 @@ public:
 	virtual void serialize(std::ostream& os) override;
 	virtual void deserialize(std::istream& is) override;
 
-	PhoneNumber(std::string phone = "");
+	std::string getPhone() const;
+
+	PhoneNumber();
+	PhoneNumber(std::string phone);
 };
 
 std::istream& operator>>(std::istream& is, PhoneNumber& phoneNumber);

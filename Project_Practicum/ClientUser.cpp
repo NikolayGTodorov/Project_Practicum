@@ -13,12 +13,12 @@ ClientUser::ClientUser() : User()
 
 void ClientUser::serialize(std::ostream& os)
 {
-	static_cast<User&>(*this).serialize(os);
+	User::serialize(os);
 }
 
 void ClientUser::deserialize(std::istream& is)
 {
-	static_cast<User&>(*this).deserialize(is);
+	User::deserialize(is);
 }
 
 int ClientUser::getAccountsCount() const

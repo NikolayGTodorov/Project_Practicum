@@ -140,9 +140,11 @@ void CardManager::deserialize(std::istream& is)
 	int size;
 	mCards.clear();
 	is.read((char*)&size, sizeof(int));
-	mCards.resize(size + 1);
-	for (int i = 0; i < size; i++) {
-		mCards[i] = new Card("", "", 0000);
-		mCards[i]->deserialize(is);
+	if (size > 0) {
+		mCards.resize(size + 1);
+		for (int i = 0; i < size; i++) {
+			mCards[i] = new Card("", "", 0000);
+			mCards[i]->deserialize(is);
+		}
 	}
 }

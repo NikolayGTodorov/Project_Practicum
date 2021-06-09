@@ -11,11 +11,10 @@ class AccountManager : public ISerializable
 public:
 	static AccountManager* getAccountManagerInstance();
 	static void releaseAccountManagerInstance();
-	void readAccountsFromFile();
-	void writeAccountsToFile();
 
 	bool accountWithNumberExists(std::string accountNumber);
 	std::string generateAccountNumber(std::string egn);
+
 	void addAccount(std::string egn, double balance);
 	bool removeAccount(std::string egn, std::string accountNumber);
 
@@ -29,7 +28,5 @@ public:
 
 	virtual void serialize(std::ostream& os);
 	virtual void deserialize(std::istream& is);
-	//void addCardToAccount();
-	//void deleteCardFromAccount();
 };
 

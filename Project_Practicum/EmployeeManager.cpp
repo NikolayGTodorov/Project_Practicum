@@ -66,7 +66,7 @@ bool EmployeeManager::employeeWithPasswordExist(std::string password)
 	return 0;
 }
 
-EmployeeUser* EmployeeManager::getUserByCredentials(std::string username, std::string password) 
+EmployeeUser* EmployeeManager::getUserByCredentials(std::string username, std::string password)
 {
 	for (EmployeeUser* empUser : mEmployees) {
 		if (empUser->getUsername() == username && empUser->getPassword() == password) {
@@ -108,9 +108,11 @@ void EmployeeManager::deserialize(std::istream& is)
 	int size;
 	mEmployees.clear();
 	is.read((char*)&size, sizeof(int));
-	mEmployees.resize(size + 1);
-	for (int i = 0; i < size; i++) {
-		mEmployees[i] = new EmployeeUser();
-		mEmployees[i]->deserialize(is);
+	if (size > 0) {
+		mEmployees.resize(size + 1);
+		for (int i = 0; i < size; i++) {
+			mEmployees[i] = new EmployeeUser();
+			mEmployees[i]->deserialize(is);
+		}
 	}
 }

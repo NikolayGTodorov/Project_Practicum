@@ -21,6 +21,7 @@ public:
 
     std::string getUsername() const;
     std::string getPassword() const;
+    std::string getPhoneNumber() const;
 
     virtual void serialize(std::ostream& os) override;
     virtual void deserialize(std::istream& is) override;
@@ -37,3 +38,4 @@ public:
 };
 
 std::istream& operator>>(std::istream& is, EmployeeUser& empUser);
+bool containsDigitsOnly(const std::string& str);

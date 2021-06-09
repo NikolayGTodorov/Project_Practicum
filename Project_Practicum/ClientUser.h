@@ -12,7 +12,7 @@ class ClientUser :
 public:
     ClientUser(std::string egn, std::string firstName, std::string secondName,
         std::string lastName, BirthDate birthDate,
-        std::string address);// check for =address
+        std::string address);
     ClientUser();
 
     virtual void serialize(std::ostream& os) override;
@@ -21,6 +21,7 @@ public:
     int getAccountsCount() const;
     const std::vector<Account*> getAccounts() const;
     int getCardsCount() const;
+
 
     void deposit(std::string accountNumber);
     void withdraw(std::string accountNumber);

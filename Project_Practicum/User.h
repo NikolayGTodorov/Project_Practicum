@@ -5,7 +5,7 @@
 class User : public ISerializable
 {
 	friend std::istream& operator >>(std::istream& is, User& user);
-	friend std::ostream& operator<<(std::ostream& os, User& user);
+	friend std::ostream& operator<<(std::ostream& os, const User& user);
 protected:
 	std::string mEgn;
 	std::string mFirstName;
@@ -19,6 +19,7 @@ protected:
 	User();
 public:
 	std::string getUserEgn() const;
+	BirthDate getBirthDate() const;
 
 	// Inherited via ISerializable
 	virtual void serialize(std::ostream& os) override;
@@ -26,4 +27,4 @@ public:
 };
 
 std::istream& operator >>(std::istream& is, User& user);
-std::ostream& operator<<(std::ostream& os, User& user);
+std::ostream& operator<<(std::ostream& os, const User& user);

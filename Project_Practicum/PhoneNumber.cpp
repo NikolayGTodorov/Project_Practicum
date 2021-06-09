@@ -20,6 +20,15 @@ void PhoneNumber::deserialize(std::istream& is)
 	delete[] tempPhone;
 }
 
+std::string PhoneNumber::getPhone() const
+{
+	return mPhone;
+}
+
+PhoneNumber::PhoneNumber() : mPhone{""}
+{
+}
+
 PhoneNumber::PhoneNumber(std::string phone) : mPhone{ phone }
 {
 }
@@ -36,8 +45,5 @@ bool isDigitsOnly(const std::string& str) {
 std::istream& operator>>(std::istream& is, PhoneNumber& phoneNumber)
 {
 	is >> phoneNumber.mPhone;
-	if (phoneNumber.mPhone.length() > 15 || !isDigitsOnly(phoneNumber.mPhone)) {
-		throw std::invalid_argument("Phone number is digits only and less than 15 digits");
-	}
 	return is;
 }

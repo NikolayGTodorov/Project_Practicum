@@ -54,6 +54,9 @@
     <ClInclude Include="ClientManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HelpFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ISerializable.cpp">

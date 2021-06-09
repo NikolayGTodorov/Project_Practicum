@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "ISerializable.h"
 class EmployeeUser;
 
 class EmployeeManager : public ISerializable
@@ -13,11 +14,11 @@ class EmployeeManager : public ISerializable
 public:
 	static EmployeeManager* getEmployeeManagerInstance();
 	static void releaseEmployeeManagerInstance();
-	//std::vector<EmployeeUser*>& getEmployees();
-	bool checkEgnAlreadyRegistered(std::string egnToCheck) const;
 
+	bool checkEgnAlreadyRegistered(std::string egnToCheck) const;
 	bool employeeWithUserNameExist(std::string username);
 	bool employeeWithPasswordExist(std::string password);
+
 	EmployeeUser* getUserByCredentials(std::string username, std::string password);
 
 	void addEmployee(EmployeeUser* user);

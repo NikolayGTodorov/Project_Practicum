@@ -12,22 +12,16 @@ public:
 	static CardManager* getCardManagerInstance();
 	static void releaseCardManagerInstance();
 
-	void readCardsFromFile();
-	void writeCardsToFile();
-
 	bool cardWithNumberExists(std::string cardNumber);
 	Card* getCardByNumber(std::string cardNumber);
+	int getCardsCountByAccountNumber(std::string accountNumber) const;
+	const std::vector<Card*> getAllCardsByAccountNumber(std::string accountNumber) const;
 
 	std::string generateCardNumber(std::string egn);
 	short int generateRandomPIN();
 
 	void addCard(std::string egn, std::string accountNumber);
 	bool removeCard(std::string egn, std::string accountNumber, std::string cardNumber);
-
-	int getCardsCountByAccountNumber(std::string accountNumber) const;
-
-	const std::vector<Card*> getAllCardsByAccountNumber(std::string accountNumber) const;
-
 	void removeAllCardsFromAccount(std::string account);
 
 	// Inherited via ISerializable

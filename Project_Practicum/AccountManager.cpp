@@ -147,9 +147,11 @@ void AccountManager::deserialize(std::istream& is)
 	int size;
 	mAccounts.clear();
 	is.read((char*)&size, sizeof(int));
-	mAccounts.resize(size + 1);
-	for (int i = 0; i < size; i++) {
-		mAccounts[i] = new Account("", "", 0);
-		mAccounts[i]->deserialize(is);
+	if (size > 0) {
+		mAccounts.resize(size + 1);
+		for (int i = 0; i < size; i++) {
+			mAccounts[i] = new Account("", "", 0);
+			mAccounts[i]->deserialize(is);
+		}
 	}
 }

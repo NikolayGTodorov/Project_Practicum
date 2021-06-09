@@ -18,14 +18,11 @@ public:
 
 	const std::vector<ClientUser*> getClientsVector() const;
 	ClientUser* getClientUserByAccountNumber(std::string accountNumber) const;
-
-	bool clientWithEgnExists(std::string egn) const;
 	ClientUser* getClientByEgn(std::string egn) const;
-
+	bool clientWithEgnExists(std::string egn) const;
 
 	// Inherited via ISerializable
 	virtual void serialize(std::ostream& os) override;
-
 	virtual void deserialize(std::istream& is) override;
 
 };

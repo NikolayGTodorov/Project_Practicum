@@ -5,6 +5,44 @@
 #include "ClientManager.h"
 #include "AccountManager.h"
 
+void initializeFiles() {
+	std::ifstream accountsFile("accounts.bin", std::ios::binary);
+	std::ifstream cardsFile("cards.bin", std::ios::binary);
+	std::ifstream employeesFile("employees.bin", std::ios::binary);
+	std::ifstream clientsFile("accounts.bin", std::ios::binary);
+
+	AccountManager* accountManager = AccountManager::getAccountManagerInstance();
+	accountManager->deserialize(accountsFile);
+
+	CardManager* cardManager = CardManager::getCardManagerInstance();
+	cardManager->deserialize(cardsFile);
+
+	EmployeeManager* employeeManager = EmployeeManager::getEmployeeManagerInstance();
+	employeeManager->deserialize(employeesFile);
+
+	ClientManager* clientManager = ClientManager::getClientManagerInstance();
+	clientManager->deserialize(clientsFile);
+}
+
+void serializeManagers() {
+	std::ofstream accountsFile("accounts.bin", std::ios::binary | std::ios::trunc);
+	std::ofstream cardsFile("cards.bin", std::ios::binary | std::ios::trunc);
+	std::ofstream employeesFile("employees.bin", std::ios::binary | std::ios::trunc);
+	std::ofstream clientsFile("accounts.bin", std::ios::binary | std::ios::trunc);
+
+	AccountManager* accountManager = AccountManager::getAccountManagerInstance();
+	accountManager->serialize(accountsFile);
+
+	CardManager* cardManager = CardManager::getCardManagerInstance();
+	cardManager->serialize(cardsFile);
+
+	EmployeeManager* employeeManager = EmployeeManager::getEmployeeManagerInstance();
+	employeeManager->serialize(employeesFile);
+
+	ClientManager* clientManager = ClientManager::getClientManagerInstance();
+	clientManager->serialize(clientsFile);
+}
+
 
 void run() {
 	std::string command;
@@ -151,9 +189,7 @@ void run() {
 }
 
 int main() {
-	//run();
-	/*std::ifstream file("accounts.bin", std::ios::binary | std::ios::trunc);
-	AccountManager* accManager = AccountManager::getAccountManagerInstance();
-	accManager->deserialize(file);*/
-
+	initializeFiles();
+	run();
+	serializeManagers();
 }
