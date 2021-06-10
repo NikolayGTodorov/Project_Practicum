@@ -108,7 +108,7 @@ void EmployeeUser::deleteClient()
 	if (clientManager->removeClientByEgn(egn) == 1) {
 		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
 		accountManager->removeAllAccountsAndCardsWithEgn(egn);
-		std::cout << "Successfully deleted client with EGN: " << egn << "and all cards and accounts associated with it...\n";
+		std::cout << "Successfully deleted client with EGN: " << egn << " and all cards and accounts associated with it...\n";
 	}
 	else {
 		std::cout << "Couldn't find client with this egn...\n";
@@ -123,9 +123,12 @@ void EmployeeUser::openAccount()
 	std::cin >> egn;
 	ClientManager* clientManager = ClientManager::getClientManagerInstance();
 	if (clientManager->clientWithEgnExists(egn)) {
-		std::cout << "Enter initial amount to be added: ";
-		std::cin >> amount;
+		std::cout << "Enter positive initial amount to be added: ";
+		do {
+			std::cin >> amount;
+		} while (amount < 0);
 		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
+		std::cout << "Account created successfully.\n";
 		accountManager->addAccount(egn, amount);
 	}
 	else {
@@ -146,6 +149,7 @@ void EmployeeUser::closeAccount()
 		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
 		if (accountManager->removeAccount(egn, accountNumber) == 1) {
 			CardManager* cardManager = CardManager::getCardManagerInstance();
+			std::cout << "Successfully removed the account: " << accountNumber << " and the associated cards with it.\n";
 			cardManager->removeAllCardsFromAccount(accountNumber);
 		}
 		else {
@@ -170,6 +174,7 @@ void EmployeeUser::addCardToAccount()
 		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
 		if (accountManager->accountWithNumberExists(accountNumber)) {
 			CardManager* cardManager = CardManager::getCardManagerInstance();
+			std::cout << "Card created successfully.\n";
 			cardManager->addCard(egn, accountNumber);
 		}
 		else {
@@ -192,11 +197,14 @@ void EmployeeUser::deleteCardFromAccount()
 		std::string cardNumber;
 		std::cout << "Enter account number card is assigned to: ";
 		std::cin >> accountNumber;
-		std::cout << "Enter PIN of card to be removed: ";
+		std::cout << "Enter Card number to be removed: ";
 		std::cin >> cardNumber;
 		CardManager* cardManager = CardManager::getCardManagerInstance();
 		if (cardManager->removeCard(egn, accountNumber, cardNumber) == 0) {
 			std::cout << "Entered invalid account or card number...\n";
+		}
+		else {
+			std::cout << "Card deleted successfully.\n";
 		}
 	}
 	else {

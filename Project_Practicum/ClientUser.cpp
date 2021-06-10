@@ -44,6 +44,7 @@ int ClientUser::getCardsCount() const
 void ClientUser::deposit(std::string accountNumber)
 {
 	double toAdd;
+	std::cout << "Enter amount to be deposited: ";
 	std::cin >> toAdd;
 	if (toAdd > 0) {
 		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
@@ -59,6 +60,7 @@ void ClientUser::deposit(std::string accountNumber)
 void ClientUser::withdraw(std::string accountNumber)
 {
 	double toWithdraw;
+	std::cout << "Enter amount to be withdrawed: ";
 	std::cin >> toWithdraw;
 	if (toWithdraw > 0 && checkBalance(accountNumber) - toWithdraw > 0) {
 		AccountManager* accountManager = AccountManager::getAccountManagerInstance();
@@ -91,13 +93,13 @@ std::ostream& operator<<(std::ostream& os, ClientUser& client)
 	int index = 0;
 	int innerIndex = 0;
 	for (Account* account : accountManager->getAllAccountsByEgn(client.getUserEgn())) {
-		os << "Account" << index << '\n';
+		os << "Account " << index << '\n';
 		os << "Account Number: " << account->getAccountNumber() << '\n'
 			<< "Balance: " << account->getBalance() << '\n'
 			<< "Number of cards: " << account->getCardsCount() << '\n';
 		index++;
 		for (Card* card : cardManager->getAllCardsByAccountNumber(account->getAccountNumber())) {
-			os << "Card" << innerIndex << '\n';
+			os << "Card " << innerIndex << '\n';
 			os << "Card number: " << card->getCardNumber() << "\nPIN: " << card->getPin() << '\n';
 			innerIndex++;
 		}

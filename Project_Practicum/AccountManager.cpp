@@ -55,7 +55,7 @@ void AccountManager::addAccount(std::string egn, double balance)
 {
 	std::string accountNumber = generateAccountNumber(egn);
 	mAccounts.push_back(new Account(egn, accountNumber, balance));
-	std::cout << "Account number" << accountNumber << '\n';
+	std::cout << "Account number: " << accountNumber << '\n';
 }
 
 bool AccountManager::removeAccount(std::string egn, std::string accountNumber)
@@ -148,7 +148,7 @@ void AccountManager::deserialize(std::istream& is)
 	mAccounts.clear();
 	is.read((char*)&size, sizeof(int));
 	if (size > 0) {
-		mAccounts.resize(size + 1);
+		mAccounts.resize(size);
 		for (int i = 0; i < size; i++) {
 			mAccounts[i] = new Account("", "", 0);
 			mAccounts[i]->deserialize(is);

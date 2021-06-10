@@ -97,7 +97,7 @@ void BirthDate::deserialize(std::istream& is)
 
 std::istream& operator>>(std::istream& is, BirthDate& birthDate)
 {
-	std::cout << "Enter date in format mm/dd/yyyy: \n";
+	std::cout << "Enter date in format dd/mm/yyyy: \n";
 	is >> birthDate.mDate;
 	return is;
 }

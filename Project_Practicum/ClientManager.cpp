@@ -102,7 +102,7 @@ void ClientManager::deserialize(std::istream& is)
 	mClients.clear();
 	is.read((char*)&size, sizeof(int));
 	if (size > 0) {
-		mClients.resize(size + 1);
+		mClients.resize(size);
 		for (int i = 0; i < size; i++) {
 			mClients[i] = new ClientUser();
 			mClients[i]->deserialize(is);

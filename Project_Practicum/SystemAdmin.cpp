@@ -1,6 +1,5 @@
 #include "SystemAdmin.h"
 #include "ClientManager.h"
-#include "HelpFunctions.h"
 
 SystemAdmin* SystemAdmin::admin = 0;
 

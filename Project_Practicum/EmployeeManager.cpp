@@ -109,7 +109,7 @@ void EmployeeManager::deserialize(std::istream& is)
 	mEmployees.clear();
 	is.read((char*)&size, sizeof(int));
 	if (size > 0) {
-		mEmployees.resize(size + 1);
+		mEmployees.resize(size);
 		for (int i = 0; i < size; i++) {
 			mEmployees[i] = new EmployeeUser();
 			mEmployees[i]->deserialize(is);

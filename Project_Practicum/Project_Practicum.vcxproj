@@ -148,7 +148,6 @@
     <ClInclude Include="ClientUser.h" />
     <ClInclude Include="EmployeeManager.h" />
     <ClInclude Include="EmployeeUser.h" />
-    <ClInclude Include="HelpFunctions.h" />
     <ClInclude Include="ISerializable.h" />
     <ClInclude Include="PhoneNumber.h" />
     <ClInclude Include="SystemAdmin.h" />
