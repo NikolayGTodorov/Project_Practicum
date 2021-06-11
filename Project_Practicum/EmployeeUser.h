@@ -23,9 +23,6 @@ public:
     std::string getPassword() const;
     std::string getPhoneNumber() const;
 
-    virtual void serialize(std::ostream& os) override;
-    virtual void deserialize(std::istream& is) override;
-
     void addClient();
     void deleteClient();
     void openAccount();
@@ -34,6 +31,9 @@ public:
     void deleteCardFromAccount();
     void printClientsReport();
     void printIndividualReport();
+
+    virtual void serialize(std::ostream& os) override;
+    virtual void deserialize(std::istream& is) override;
 
 };
 

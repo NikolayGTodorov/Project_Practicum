@@ -15,17 +15,16 @@ public:
         std::string address);
     ClientUser();
 
-    virtual void serialize(std::ostream& os) override;
-    virtual void deserialize(std::istream& is) override;
-
     int getAccountsCount() const;
     const std::vector<Account*> getAccounts() const;
     int getCardsCount() const;
 
-
     void deposit(std::string accountNumber);
     void withdraw(std::string accountNumber);
     double checkBalance(std::string accountNumber);
+    
+    virtual void serialize(std::ostream& os) override;
+    virtual void deserialize(std::istream& is) override;
 };
 
 std::istream& operator>>(std::istream& is, ClientUser& client);

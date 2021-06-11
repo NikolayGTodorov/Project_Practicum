@@ -9,13 +9,14 @@ class PhoneNumber :
 
 	std::string mPhone;
 public:
-	virtual void serialize(std::ostream& os) override;
-	virtual void deserialize(std::istream& is) override;
+	PhoneNumber();
+	PhoneNumber(std::string phone);
 
 	std::string getPhone() const;
 
-	PhoneNumber();
-	PhoneNumber(std::string phone);
+	virtual void serialize(std::ostream& os) override;
+	virtual void deserialize(std::istream& is) override;
+	
 };
 
 std::istream& operator>>(std::istream& is, PhoneNumber& phoneNumber);

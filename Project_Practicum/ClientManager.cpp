@@ -51,7 +51,7 @@ const std::vector<ClientUser*> ClientManager::getClientsVector() const
 	return mClients;
 }
 
-ClientUser* ClientManager::getClientUserByAccountNumber(std::string accountNumber) const
+ClientUser* ClientManager::getClientByAccountNumber(std::string accountNumber) const
 {
 	for (ClientUser* client : mClients) {
 		for (Account* account : client->getAccounts()) {

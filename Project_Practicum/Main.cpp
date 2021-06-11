@@ -4,8 +4,12 @@
 #include "CardManager.h"
 #include "ClientManager.h"
 #include "AccountManager.h"
+#include "Utility.h"
+#include "loginAsAdmin.h"
+#include "loginAsEmployee.h"
+#include "loginAsClient.h"
 
-void initializeFiles() {
+void deserializeManagers() {
 	std::ifstream accountsFile("accounts.bin", std::ios::binary);
 	std::ifstream cardsFile("cards.bin", std::ios::binary);
 	std::ifstream employeesFile("employees.bin", std::ios::binary);
@@ -47,169 +51,37 @@ void serializeManagers() {
 	clientManager->releaseClientManagerInstance();
 }
 
-void loginAsAdmin(std::string& command) {
-	std::string username;
-	std::string password;
-	std::cout << "Enter username: ";
-	std::cin >> username;
-	std::cout << "Enter password: ";
-	std::cin >> password;
-	if (username == "admin" && password == "admin") {
-		std::cout << "Login successfull.\n";
-		SystemAdmin* admin = SystemAdmin::getSystemAdminInstance();
-		do {
-			std::cout << '>';
-			std::cin >> command;
-			if (command == "help") {
-				std::cout << "The available commands are:\n- addEmployee\n" <<
-					"- removeEmployee\n";
-			}
-			else if (command == "addEmployee") {
-				admin->addEmployeeAccount();
-			}
-			else if (command == "removeEmployee") {
-				admin->deleteEmployeeAccount();
-			}
-			else {
-				std::cout << "Invalid command...\n";
-			}
-		} while (command != "exit");
-	}
-	else {
-		std::cout << "Invalid username or password...\n";
-	}
-}
-
-void loginAsEmployee(std::string& command) {
-	std::string username;
-	std::string password;
-	std::cout << "Enter username: ";
-	std::cin >> username;
-	std::cout << "Enter password: ";
-	std::cin >> password;
-	EmployeeManager* employeeManager = EmployeeManager::getEmployeeManagerInstance();
-	if (employeeManager->employeeWithUserNameExist(username)) {
-		if (employeeManager->employeeWithPasswordExist(password)) {
-			std::cout << "Login successfull.\n";
-			do {
-				std::cout << '>';
-				std::cin >> command;
-				EmployeeUser* currentlyLogged = employeeManager->getUserByCredentials(username, password);
-				if (command == "help") {
-					std::cout << "The available commands are:\n- addClient\n" <<
-						"- removeClient\n- addAccountToClient\n- addCardToClientAccount\n"
-						<< "-removeClientAccount\n- removeCardFromAccount\n- printAllClients\n"
-						<< "- printIndividualSummary\n";
-				}
-				else if (command == "addClient") {
-					currentlyLogged->addClient();
-				}
-				else if (command == "removeClient") {
-					currentlyLogged->deleteClient();
-				}
-				else if (command == "addAccountToClient") {
-					currentlyLogged->openAccount();
-				}
-				else if (command == "removeClientAccount") {
-					currentlyLogged->closeAccount();
-				}
-				else if (command == "addCardToClientAccount") {
-					currentlyLogged->addCardToAccount();
-				}
-				else if (command == "removeCardFromAccount") {
-					currentlyLogged->deleteCardFromAccount();
-				}
-				else if (command == "printAllClients") {
-					currentlyLogged->printClientsReport();
-				}
-				else if (command == "printIndividualSummary") {
-					currentlyLogged->printIndividualReport();
-				}
-				else {
-					std::cout << "Invalid command...\n";
-				}
-			} while (command != "exit");
-		}
-		else {
-			std::cout << "Incorrect password...\n";
-		}
-	}
-	else {
-		std::cout << "User does not exist...\n";
-	}
-}
-
-void loginAsClient(std::string& command) {
-	std::string cardNumber;
-	short int pin;
-	std::cout << "Enter card number: ";
-	std::cin >> cardNumber;
-	std::cout << "Enter pin for the card: ";
-	std::cin >> pin;
-	CardManager* cardManager = CardManager::getCardManagerInstance();
-	if (cardManager->cardWithNumberExists(cardNumber)) {
-		Card* currentCard = cardManager->getCardByNumber(cardNumber);
-		if (currentCard->getPin() == pin) {
-			ClientManager* clientManager = ClientManager::getClientManagerInstance();
-			ClientUser* currentlyLogged = clientManager->getClientUserByAccountNumber(currentCard->getAccountAssociatedWith());
-			std::cout << "Login successfull.\n";
-			do {
-				std::cout << '>';
-				std::cin >> command;
-				if (command == "help") {
-					std::cout << "The available commands are:\n- deposit\n" <<
-						"- withdraw\n- checkBalance\n";
-				}
-				else if (command == "deposit") {
-					currentlyLogged->deposit(currentCard->getAccountAssociatedWith());
-				}
-				else if (command == "withdraw") {
-					currentlyLogged->withdraw(currentCard->getAccountAssociatedWith());
-				}
-				else if (command == "checkBalance") {
-					std::cout << "Current balance: " << currentlyLogged->checkBalance(currentCard->getAccountAssociatedWith());
-				}
-				else {
-					std::cout << "Invalid command...\n";
-				}
-			} while (command != "exit");
-		}
-		else {
-			std::cout << "Entered pin is incorrect...\n";
-		}
-	}
-	else {
-		std::cout << "Such card does not exist...\n";
-	}
-}
-
 void run() {
 	std::string command;
 	do {
 		std::cout << '>';
 		std::cin >> command;
-		if (command == "loginAsAdmin") {
+		if (toLower(command) == "loginasadmin") {
 			loginAsAdmin(command);
 		}
-		else if (command == "loginAsEmployee") {
+		else if (toLower(command) == "loginasemployee") {
 			loginAsEmployee(command);
 		}
-		else if (command == "loginAsClient") {
+		else if (toLower(command) == "loginasclient") {
 			loginAsClient(command);
 		}
-		else if (command == "help") {
-			std::cout << "The available commands are:\n- loginAsAdmin\n" <<
-				"- loginAsEmployee\n- loginAsClient\n";
+		else if (toLower(command) == "help") {
+			std::cout << "The available commands are:\n- loginAsAdmin (The user enters username and password and if they exist he enters as Admin)\n" <<
+				"- loginAsEmployee (The user enters username and password and if they exist they enter the system as Employee)\n" 
+				<< "- loginAsClient (The user enters card number and pin of this card (he must own it) and if they exist and are his property he is logged as Client)\n";
+		}
+		else if (toLower(command) == "exit") {
+			std::cout << "Exitting the program.\n";
 		}
 		else {
 			std::cout << "Invalid command...\n";
 		}
-	} while (command != "exit");
+	} while (toLower(command) != "exit");
 
 }
 
 int main() {
-	initializeFiles();
+	deserializeManagers();
 	run();
 	serializeManagers();
 }

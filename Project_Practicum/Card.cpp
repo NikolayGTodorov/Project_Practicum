@@ -52,4 +52,7 @@ void Card::deserialize(std::istream& is)
 	mCardNumber = tempCardNumber;
 
 	is.read((char*)&mPin, sizeof(short int));
+
+	delete[] tempAccountNumber;
+	delete[] tempCardNumber;
 }

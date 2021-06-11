@@ -149,9 +149,13 @@
     <ClInclude Include="EmployeeManager.h" />
     <ClInclude Include="EmployeeUser.h" />
     <ClInclude Include="ISerializable.h" />
+    <ClInclude Include="loginAsAdmin.h" />
+    <ClInclude Include="loginAsClient.h" />
+    <ClInclude Include="loginAsEmployee.h" />
     <ClInclude Include="PhoneNumber.h" />
     <ClInclude Include="SystemAdmin.h" />
     <ClInclude Include="User.h" />
+    <ClInclude Include="Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Account.cpp" />

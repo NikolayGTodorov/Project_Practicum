@@ -17,7 +17,7 @@ public:
 	bool removeClientByEgn(std::string egn);
 
 	const std::vector<ClientUser*> getClientsVector() const;
-	ClientUser* getClientUserByAccountNumber(std::string accountNumber) const;
+	ClientUser* getClientByAccountNumber(std::string accountNumber) const;
 	ClientUser* getClientByEgn(std::string egn) const;
 	bool clientWithEgnExists(std::string egn) const;
 

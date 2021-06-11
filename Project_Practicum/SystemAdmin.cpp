@@ -39,7 +39,7 @@ void SystemAdmin::addEmployeeAccount()
 		if (empManager->checkEgnAlreadyRegistered(emp->getUserEgn()) || clientManager->clientWithEgnExists(emp->getUserEgn())) {
 			std::cout << "User with such Egn already exists...\n";
 		}
-		if (!stringContainsDigitsOnly(emp->getPhoneNumber()) && !emp->getPhoneNumber().length() <= 15) {
+		if (!stringContainsDigitsOnly(emp->getPhoneNumber()) && !(emp->getPhoneNumber().length() <= 15)) {
 			std::cout << "Invalid phone number (max length: 15 and digits only)\n";
 		}
 		if (!emp->getBirthDate().validInput(emp->getBirthDate().getDate())) {
